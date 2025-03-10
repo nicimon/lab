@@ -1,2 +1,3 @@
 # Network Engineer
-**LAB**
+
+- [Лабораторная работа №1](lab1/)
