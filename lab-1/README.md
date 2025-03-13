@@ -19,6 +19,9 @@
 | Spine 2 → BorderLeaf 1 | 10.2.2.8         | 10.2.2.9         | 10.2.1.8/31  	|
 | Spine 2 → BorderLeaf 2 | 10.2.2.10        | 10.2.2.11          | 10.2.1.10/31  	|
 
+---
+Loopack-s:
+
 ### Реализовать схему
 
 ![img_1.png](screenshots/laba1.png)
