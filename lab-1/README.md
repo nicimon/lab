@@ -73,3 +73,38 @@ xe-0/0/2.0              up    up   inet     10.2.2.1/31
 lo0.0                   up    up   inet     10.0.1.1            --> 0/0
 lo0.2                   up    up   inet     10.1.0.1            --> 0/0
 ```
+root@Leaf2> show interfaces terse | match "10.[0,1,2]" 
+```text
+xe-0/0/1.0              up    up   inet     10.2.1.3/31     
+xe-0/0/2.0              up    up   inet     10.2.2.3/31     
+lo0.0                   up    up   inet     10.0.1.2            --> 0/0
+lo0.2                   up    up   inet     10.1.0.2            --> 0/0
+```
+root@Leaf3> show interfaces terse | match "10.[0,1,2]"  
+  ```text
+xe-0/0/1.0              up    up   inet     10.2.1.5/31     
+xe-0/0/2.0              up    up   inet     10.2.2.5/31     
+lo0.0                   up    up   inet     10.0.1.3            --> 0/0
+lo0.2                   up    up   inet     10.1.0.3            --> 0/0
+```
+root@Leaf4> show interfaces terse | match "10.[0,1,2]"    
+```text
+xe-0/0/1.0              up    up   inet     10.2.1.7/31     
+xe-0/0/2.0              up    up   inet     10.2.2.7/31     
+lo0.0                   up    up   inet     10.0.1.4            --> 0/0
+lo0.2                   up    up   inet     10.1.0.4            --> 0/0
+```
+root@BorderLeaf1> show interfaces terse | match "10.[0,1,2]" 
+```text
+xe-0/0/1.0              up    up   inet     10.2.1.9/31     
+xe-0/0/2.0              up    up   inet     10.2.2.9/31     
+lo0.0                   up    up   inet     10.0.1.5            --> 0/0
+lo0.2                   up    up   inet     10.1.0.5            --> 0/0
+```
+root@BorderLeaf2> show interfaces terse | match "10.[0,1,2]" 
+```text
+xe-0/0/1.0              up    up   inet     10.2.1.11/31    
+xe-0/0/2.0              up    up   inet     10.2.2.11/31    
+lo0.0                   up    up   inet     10.0.1.6            --> 0/0
+lo0.2                   up    up   inet     10.1.0.6            --> 0/0
+```
