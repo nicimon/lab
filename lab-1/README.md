@@ -39,3 +39,19 @@ Loopack-s:
 | Spine 2 → Leaf 4 	| 10.2.2.6              | 10.2.2.7          | 10.2.1.6/31  	|
 | Spine 2 → BorderLeaf 1 | 10.2.2.8         | 10.2.2.9         | 10.2.1.8/31  	|
 | Spine 2 → BorderLeaf 2 | 10.2.2.10        | 10.2.2.11          | 10.2.1.10/31  |
+
+---
+
+### IP установлены следующим образом
+
+root@Spine1> show interfaces terse | match "10.[0,1,2]"
+```text
+xe-0/0/1.0              up    up   inet     10.2.1.0/31     
+xe-0/0/2.0              up    up   inet     10.2.1.2/31     
+xe-0/0/3.0              up    up   inet     10.2.1.4/31     
+xe-0/0/4.0              up    up   inet     10.2.1.6/31     
+xe-0/0/5.0              up    up   inet     10.2.1.8/31     
+xe-0/0/6.0              up    up   inet     10.2.1.10/31    
+lo0.0                   up    up   inet     10.0.1.0            --> 0/0
+lo0.2                   up    up   inet     10.1.1.0            --> 0/0
+```
