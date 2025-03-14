@@ -108,3 +108,26 @@ xe-0/0/2.0              up    up   inet     10.2.2.11/31
 lo0.0                   up    up   inet     10.0.1.6            --> 0/0
 lo0.2                   up    up   inet     10.1.0.6            --> 0/0
 ```
+---
+
+Проверяем ping-ом со стороны **Spine-1** Leaf1:
+
+```text
+root@Spine1> ping 10.2.1.1 count 1 
+PING 10.2.1.1 (10.2.1.1): 56 data bytes
+64 bytes from 10.2.1.1: icmp_seq=0 ttl=64 time=126.823 ms
+
+--- 10.2.1.1 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 126.823/126.823/126.823/0.000 ms
+```
+Проверяем ping-ом со стороны **Spine-2** Leaf1:
+```text
+root@Spine2> ping 10.2.2.1 count 1   
+PING 10.2.2.1 (10.2.2.1): 56 data bytes
+64 bytes from 10.2.2.1: icmp_seq=0 ttl=64 time=120.475 ms
+
+--- 10.2.2.1 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 120.475/120.475/120.475/0.000 ms
+```
