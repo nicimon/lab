@@ -2,4 +2,4 @@
 
 ### Схема связи
 
-![img_1.png](screenshots/laba2.png)
+![img_2.png](screenshots/laba2.png)
