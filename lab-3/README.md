@@ -2,7 +2,8 @@
 
 ## IS-IS в UNDELAY сети
 
-Loopack-s:
+---
+
 | Switch      | Lo0 /32  |           NSAP            |
 |-------------|----------|---------------------------|
 | Spine1      | 10.0.1.0 | 49.0078.0100.0000.1000.00 |
@@ -13,3 +14,15 @@ Loopack-s:
 | Leaf4       | 10.0.1.4 | 49.0078.0100.0000.1004.00 |
 | BorderLeaf1 | 10.0.1.5 | 49.0078.0100.0000.1005.00 |
 | BorderLeaf2 | 10.0.1.6 | 49.0078.0100.0000.1006.00 |
+
+Настраиваем интерфейсы
+```text
+root@Leaf1> show configuration interfaces xe-0/0/1  
+unit 0 {
+    description "--- Leaf1 - Spine1  ---";
+    family inet {
+        address 10.2.1.1/31;
+    }
+    family iso;
+}
+```
