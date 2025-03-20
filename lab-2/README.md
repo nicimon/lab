@@ -579,7 +579,7 @@ root@Leaf1> ping 10.0.1.5 count 1
 PING 10.0.1.5 (10.0.1.5): 56 data bytes
 64 bytes from 10.0.1.5: icmp_seq=0 ttl=63 time=117.313 ms
 
-Leaf1 <--> BorderLeaf1
+Leaf1 <--> BorderLeaf2
 root@Leaf1> ping 10.0.1.6 count 1    
 PING 10.0.1.6 (10.0.1.6): 56 data bytes
 64 bytes from 10.0.1.6: icmp_seq=0 ttl=63 time=149.823 ms
