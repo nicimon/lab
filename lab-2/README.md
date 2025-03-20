@@ -304,16 +304,245 @@ router-id 10.0.1.6;
 ```
 </details>
 
-root@Spine1> show ospf database brief 
+Проверяем соседство
+<details>
+<summary>Spine1</summary>
+
 ```text
+root@Spine1> show ospf neighbor 
+Address          Interface              State           ID               Pri  Dead
+10.2.1.1         xe-0/0/1.0             Full            10.0.1.1         128    37
+10.2.1.3         xe-0/0/2.0             Full            10.0.1.2         128    37
+10.2.1.5         xe-0/0/3.0             Full            10.0.1.3         128    34
+10.2.1.7         xe-0/0/4.0             Full            10.0.1.4         128    38
+10.2.1.9         xe-0/0/5.0             Full            10.0.1.5         128    37
+10.2.1.11        xe-0/0/6.0             Full            10.0.1.6         128    38
+```
+</details>
+<details>
+<summary>Spine2</summary>
+
+```text
+root@Spine2> show ospf neighbor 
+Address          Interface              State           ID               Pri  Dead
+10.2.2.1         xe-0/0/1.0             Full            10.0.1.1         128    32
+10.2.2.3         xe-0/0/2.0             Full            10.0.1.2         128    34
+10.2.2.5         xe-0/0/3.0             Full            10.0.1.3         128    33
+10.2.2.7         xe-0/0/4.0             Full            10.0.1.4         128    33
+10.2.2.9         xe-0/0/5.0             Full            10.0.1.5         128    36
+10.2.2.11        xe-0/0/6.0             Full            10.0.1.6         128    31
+```
+</details>
+<details>
+<summary>Leaf1</summary>
+
+```text
+root@Leaf1> show ospf neighbor 
+Address          Interface              State           ID               Pri  Dead
+10.2.1.0         xe-0/0/1.0             Full            10.0.1.0         128    37
+10.2.2.0         xe-0/0/2.0             Full            10.0.2.0         128    32
+```
+</details>
+<details>
+<summary>Leaf2</summary>
+
+```text
+root@Leaf2> show ospf neighbor 
+Address          Interface              State           ID               Pri  Dead
+10.2.1.2         xe-0/0/1.0             Full            10.0.1.0         128    38
+10.2.2.2         xe-0/0/2.0             Full            10.0.2.0         128    35
+```
+</details>
+<details>
+<summary>Leaf3</summary>
+
+```text
+root@Leaf3> show ospf neighbor 
+Address          Interface              State           ID               Pri  Dead
+10.2.1.4         xe-0/0/1.0             Full            10.0.1.0         128    33
+10.2.2.4         xe-0/0/2.0             Full            10.0.2.0         128    36
+```
+</details>
+<details>
+<summary>Leaf4</summary>
+
+```text
+root@Leaf4> show ospf neighbor 
+Address          Interface              State           ID               Pri  Dead
+10.2.1.6         xe-0/0/1.0             Full            10.0.1.0         128    39
+10.2.2.6         xe-0/0/2.0             Full            10.0.2.0         128    39
+```
+</details>
+<details>
+<summary>BorderLeaf1</summary>
+
+```text
+root@BorderLeaf1> show ospf neighbor 
+Address          Interface              State           ID               Pri  Dead
+10.2.1.8         xe-0/0/1.0             Full            10.0.1.0         128    35
+10.2.2.8         xe-0/0/2.0             Full            10.0.2.0         128    35
+```
+</details>
+<details>
+<summary>BorderLeaf2</summary>
+
+```text
+root@BorderLeaf2> show ospf neighbor 
+Address          Interface              State           ID               Pri  Dead
+10.2.1.10        xe-0/0/1.0             Full            10.0.1.0         128    31
+10.2.2.10        xe-0/0/2.0             Full            10.0.2.0         128    34
+```
+</details>
+
+Проверим базу ospf 
+<details>
+<summary>Spine1</summary>
+
+```text
+root@Spine1> show ospf database 
+
     OSPF database, Area 0.0.0.0
  Type       ID               Adv Rtr           Seq      Age  Opt  Cksum  Len 
-Router  *10.0.1.0         10.0.1.0         0x8000000c  2155  0x22 0x9619 180
-Router   10.0.1.1         10.0.1.1         0x8000000f   803  0x22 0xdc72  84
-Router   10.0.1.2         10.0.1.2         0x8000000e  1311  0x22 0x2a1b  84
-Router   10.0.1.3         10.0.1.3         0x8000000b  1304  0x22 0x7bc1  84
-Router   10.0.1.4         10.0.1.4         0x8000000b  1311  0x22 0xc66b  84
-Router   10.0.1.5         10.0.1.5         0x8000000d  1299  0x22 0xdd67  72
-Router   10.0.1.6         10.0.1.6         0x80000005  1299  0x22 0xce74  72
-Router   10.0.2.0         10.0.2.0         0x80000019   804  0x22 0xa3ef 180
+Router  *10.0.1.0         10.0.1.0         0x80000020  1798  0x22 0x6e2d 180
+Router   10.0.1.1         10.0.1.1         0x80000023   446  0x22 0xb486  84
+Router   10.0.1.2         10.0.1.2         0x80000022   954  0x22 0x22f   84
+Router   10.0.1.3         10.0.1.3         0x8000001f   947  0x22 0x53d5  84
+Router   10.0.1.4         10.0.1.4         0x8000001f   954  0x22 0x9e7f  84
+Router   10.0.1.5         10.0.1.5         0x80000022  2347  0x22 0xe32c  84
+Router   10.0.1.6         10.0.1.6         0x8000001a  2374  0x22 0x3fcd  84
+Router   10.0.2.0         10.0.2.0         0x8000002d   447  0x22 0x7b04 180
 ```
+</details>
+
+<details>
+<summary>Spine2</summary>
+
+```text
+root@Spine2> show ospf database 
+
+    OSPF database, Area 0.0.0.0
+ Type       ID               Adv Rtr           Seq      Age  Opt  Cksum  Len 
+Router   10.0.1.0         10.0.1.0         0x80000020  2121  0x22 0x6e2d 180
+Router   10.0.1.1         10.0.1.1         0x80000023   767  0x22 0xb486  84
+Router   10.0.1.2         10.0.1.2         0x80000022  1275  0x22 0x22f   84
+Router   10.0.1.3         10.0.1.3         0x8000001f  1268  0x22 0x53d5  84
+Router   10.0.1.4         10.0.1.4         0x8000001f  1275  0x22 0x9e7f  84
+Router   10.0.1.5         10.0.1.5         0x80000022  2668  0x22 0xe32c  84
+Router   10.0.1.6         10.0.1.6         0x8000001a  2695  0x22 0x3fcd  84
+Router  *10.0.2.0         10.0.2.0         0x8000002d   766  0x22 0x7b04 180
+```
+</details>
+
+<details>
+<summary>Leaf1</summary>
+
+```text
+root@Leaf1> show ospf database 
+
+    OSPF database, Area 0.0.0.0
+ Type       ID               Adv Rtr           Seq      Age  Opt  Cksum  Len 
+Router   10.0.1.0         10.0.1.0         0x80000020  2144  0x22 0x6e2d 180
+Router  *10.0.1.1         10.0.1.1         0x80000023   790  0x22 0xb486  84
+Router   10.0.1.2         10.0.1.2         0x80000022  1300  0x22 0x22f   84
+Router   10.0.1.3         10.0.1.3         0x8000001f  1293  0x22 0x53d5  84
+Router   10.0.1.4         10.0.1.4         0x8000001f  1300  0x22 0x9e7f  84
+Router   10.0.1.5         10.0.1.5         0x80000022  2693  0x22 0xe32c  84
+Router   10.0.1.6         10.0.1.6         0x8000001a  2720  0x22 0x3fcd  84
+Router   10.0.2.0         10.0.2.0         0x8000002d   791  0x22 0x7b04 180
+```
+</details>
+
+<details>
+<summary>Leaf2</summary>
+
+```text
+root@Leaf2> show ospf database 
+
+    OSPF database, Area 0.0.0.0
+ Type       ID               Adv Rtr           Seq      Age  Opt  Cksum  Len 
+Router   10.0.1.0         10.0.1.0         0x80000020  2191  0x22 0x6e2d 180
+Router   10.0.1.1         10.0.1.1         0x80000023   839  0x22 0xb486  84
+Router  *10.0.1.2         10.0.1.2         0x80000022  1345  0x22 0x22f   84
+Router   10.0.1.3         10.0.1.3         0x8000001f  1340  0x22 0x53d5  84
+Router   10.0.1.4         10.0.1.4         0x8000001f  1347  0x22 0x9e7f  84
+Router   10.0.1.5         10.0.1.5         0x80000022  2740  0x22 0xe32c  84
+Router   10.0.1.6         10.0.1.6         0x8000001a  2767  0x22 0x3fcd  84
+Router   10.0.2.0         10.0.2.0         0x8000002d   838  0x22 0x7b04 180
+```
+</details>
+
+<details>
+<summary>Leaf3</summary>
+
+```text
+root@Leaf3> show ospf database 
+
+    OSPF database, Area 0.0.0.0
+ Type       ID               Adv Rtr           Seq      Age  Opt  Cksum  Len 
+Router   10.0.1.0         10.0.1.0         0x80000020  2212  0x22 0x6e2d 180
+Router   10.0.1.1         10.0.1.1         0x80000023   861  0x22 0xb486  84
+Router   10.0.1.2         10.0.1.2         0x80000022  1369  0x22 0x22f   84
+Router  *10.0.1.3         10.0.1.3         0x8000001f  1360  0x22 0x53d5  84
+Router   10.0.1.4         10.0.1.4         0x8000001f  1369  0x22 0x9e7f  84
+Router   10.0.1.5         10.0.1.5         0x80000022  2762  0x22 0xe32c  84
+Router   10.0.1.6         10.0.1.6         0x8000001a  2789  0x22 0x3fcd  84
+Router   10.0.2.0         10.0.2.0         0x8000002d   860  0x22 0x7b04 180
+```
+</details>
+
+<details>
+<summary>Leaf4</summary>
+
+```text
+root@Leaf4> show ospf database 
+
+    OSPF database, Area 0.0.0.0
+ Type       ID               Adv Rtr           Seq      Age  Opt  Cksum  Len 
+Router   10.0.1.0         10.0.1.0         0x80000020  2233  0x22 0x6e2d 180
+Router   10.0.1.1         10.0.1.1         0x80000023   881  0x22 0xb486  84
+Router   10.0.1.2         10.0.1.2         0x80000022  1390  0x22 0x22f   84
+Router   10.0.1.3         10.0.1.3         0x8000001f  1382  0x22 0x53d5  84
+Router  *10.0.1.4         10.0.1.4         0x8000001f  1388  0x22 0x9e7f  84
+Router   10.0.1.5         10.0.1.5         0x80000022  2783  0x22 0xe32c  84
+Router   10.0.1.6         10.0.1.6         0x8000001a  2810  0x22 0x3fcd  84
+Router   10.0.2.0         10.0.2.0         0x8000002d   880  0x22 0x7b04 180
+```
+</details>
+
+<details>
+<summary>BorderLeaf1</summary>
+
+```text
+root@BorderLeaf1> show ospf database 
+
+    OSPF database, Area 0.0.0.0
+ Type       ID               Adv Rtr           Seq      Age  Opt  Cksum  Len 
+Router   10.0.1.0         10.0.1.0         0x80000020  2252  0x22 0x6e2d 180
+Router   10.0.1.1         10.0.1.1         0x80000023   900  0x22 0xb486  84
+Router   10.0.1.2         10.0.1.2         0x80000022  1408  0x22 0x22f   84
+Router   10.0.1.3         10.0.1.3         0x8000001f  1401  0x22 0x53d5  84
+Router   10.0.1.4         10.0.1.4         0x8000001f  1408  0x22 0x9e7f  84
+Router  *10.0.1.5         10.0.1.5         0x80000022  2799  0x22 0xe32c  84
+Router   10.0.1.6         10.0.1.6         0x8000001a  2828  0x22 0x3fcd  84
+Router   10.0.2.0         10.0.2.0         0x8000002d   899  0x22 0x7b04 180
+```
+</details>
+
+<details>
+<summary>BorderLeaf2</summary>
+
+```text
+root@BorderLeaf2> show ospf database 
+
+    OSPF database, Area 0.0.0.0
+ Type       ID               Adv Rtr           Seq      Age  Opt  Cksum  Len 
+Router   10.0.1.0         10.0.1.0         0x80000020  2268  0x22 0x6e2d 180
+Router   10.0.1.1         10.0.1.1         0x80000023   916  0x22 0xb486  84
+Router   10.0.1.2         10.0.1.2         0x80000022  1425  0x22 0x22f   84
+Router   10.0.1.3         10.0.1.3         0x8000001f  1417  0x22 0x53d5  84
+Router   10.0.1.4         10.0.1.4         0x8000001f  1425  0x22 0x9e7f  84
+Router   10.0.1.5         10.0.1.5         0x80000022  2817  0x22 0xe32c  84
+Router  *10.0.1.6         10.0.1.6         0x8000001a  2843  0x22 0x3fcd  84
+Router   10.0.2.0         10.0.2.0         0x8000002d   915  0x22 0x7b04 180
+```
+</details>
