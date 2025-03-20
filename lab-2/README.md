@@ -196,7 +196,113 @@ router-id 10.0.1.1;
 ```
 </details>
 
+<details>
+<summary>Leaf2</summary>
 
+root@Leaf2> show configuration protocols ospf
+```text
+area 0.0.0.0 {
+    interface xe-0/0/1.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/2.0 {
+        interface-type p2p;
+    }
+    interface lo0.0;
+}
+reference-bandwidth 100g;
+
+{master:0}
+root@Leaf2> show configuration routing-options 
+router-id 10.0.1.2;
+```
+</details>
+<details>
+
+<summary>Leaf3</summary>
+
+root@Leaf3> show configuration protocols ospf
+```text
+area 0.0.0.0 {
+    interface xe-0/0/1.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/2.0 {
+        interface-type p2p;
+    }
+    interface lo0.0;
+}
+reference-bandwidth 100g;
+
+{master:0}
+root@Leaf3> show configuration routing-options 
+router-id 10.0.1.3;
+```
+</details>
+
+<details>
+<summary>Leaf4</summary>
+
+root@Leaf4> show configuration protocols ospf 
+```text
+area 0.0.0.0 {
+    interface xe-0/0/1.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/2.0 {
+        interface-type p2p;
+    }
+    interface lo0.0;
+}
+reference-bandwidth 100g;
+
+{master:0}
+root@Leaf4> show configuration routing-options 
+router-id 10.0.1.4;
+```
+</details>
+
+<details>
+<summary>BorderLeaf1</summary>
+
+root@BorderLeaf1> show configuration protocols ospf
+```text
+area 0.0.0.0 {
+    interface xe-0/0/1.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/2.0 {
+        interface-type p2p;
+    }
+    interface lo0.0;
+}
+reference-bandwidth 100g;
+
+{master:0}
+root@BorderLeaf1> show configuration routing-options 
+router-id 10.0.1.5;
+```
+</details>
+
+<details>
+<summary>BorderLeaf2</summary>
+
+root@BorderLeaf2> show configuration protocols ospf
+```text
+area 0.0.0.0 {
+    interface xe-0/0/1.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/2.0 {
+        interface-type p2p;
+    }
+    interface lo0.0;
+}
+reference-bandwidth 100g
+root@BorderLeaf2> show configuration routing-options 
+router-id 10.0.1.6;
+```
+</details>
 
 root@Spine1> show ospf database brief 
 ```text
