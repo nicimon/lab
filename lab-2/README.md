@@ -110,7 +110,8 @@ lo0.0                   up    up   inet     10.0.1.6            --> 0/0
 <details>
 <summary>Spine1</summary>
 
-root@Spine1> show configuration protocols ospf   
+root@Spine1> show configuration protocols ospf
+```text
 area 0.0.0.0 {
     interface xe-0/0/1.0 {
         interface-type p2p;
@@ -136,6 +137,7 @@ reference-bandwidth 100g;
 
 root@Spine1> show configuration routing-options 
 router-id 10.0.1.0;
+```
 </details>
 
 root@Spine1> show ospf database brief 
