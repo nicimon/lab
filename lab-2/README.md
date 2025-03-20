@@ -584,4 +584,93 @@ root@Leaf1> ping 10.0.1.6 count 1
 PING 10.0.1.6 (10.0.1.6): 56 data bytes
 64 bytes from 10.0.1.6: icmp_seq=0 ttl=63 time=149.823 ms
 ```
+Вывод ospf route Spine1 и Spine2
+```text
+Spine1
+root@Spine1> show ospf route 
+Topology default Route Table:
 
+Prefix             Path  Route      NH       Metric NextHop       Nexthop      
+                   Type  Type       Type            Interface     Address/LSP
+10.0.1.1           Intra Router     IP           10 xe-0/0/1.0    10.2.1.1
+10.0.1.2           Intra Router     IP           10 xe-0/0/2.0    10.2.1.3
+10.0.1.3           Intra Router     IP           10 xe-0/0/3.0    10.2.1.5
+10.0.1.4           Intra Router     IP           10 xe-0/0/4.0    10.2.1.7
+10.0.1.5           Intra Router     IP           10 xe-0/0/5.0    10.2.1.9
+10.0.1.6           Intra Router     IP           10 xe-0/0/6.0    10.2.1.11
+10.0.2.0           Intra Router     IP           20 xe-0/0/1.0    10.2.1.1
+                                                    xe-0/0/2.0    10.2.1.3
+                                                    xe-0/0/3.0    10.2.1.5
+                                                    xe-0/0/4.0    10.2.1.7
+                                                    xe-0/0/5.0    10.2.1.9
+                                                    xe-0/0/6.0    10.2.1.11
+10.0.1.0/32        Intra Network    IP            0 lo0.0
+10.0.1.1/32        Intra Network    IP           10 xe-0/0/1.0    10.2.1.1
+10.0.1.2/32        Intra Network    IP           10 xe-0/0/2.0    10.2.1.3
+10.0.1.3/32        Intra Network    IP           10 xe-0/0/3.0    10.2.1.5
+10.0.1.4/32        Intra Network    IP           10 xe-0/0/4.0    10.2.1.7
+10.0.1.5/32        Intra Network    IP           10 xe-0/0/5.0    10.2.1.9
+10.0.1.6/32        Intra Network    IP           10 xe-0/0/6.0    10.2.1.11
+10.0.2.0/32        Intra Network    IP           20 xe-0/0/1.0    10.2.1.1
+                                                    xe-0/0/2.0    10.2.1.3
+                                                    xe-0/0/3.0    10.2.1.5
+                                                    xe-0/0/4.0    10.2.1.7
+                                                    xe-0/0/5.0    10.2.1.9
+                                                    xe-0/0/6.0    10.2.1.11
+10.2.1.0/31        Intra Network    IP           10 xe-0/0/1.0
+10.2.1.2/31        Intra Network    IP           10 xe-0/0/2.0
+10.2.1.4/31        Intra Network    IP           10 xe-0/0/3.0
+10.2.1.6/31        Intra Network    IP           10 xe-0/0/4.0
+10.2.1.8/31        Intra Network    IP           10 xe-0/0/5.0
+10.2.1.10/31       Intra Network    IP           10 xe-0/0/6.0
+10.2.2.0/31        Intra Network    IP           20 xe-0/0/1.0    10.2.1.1
+10.2.2.2/31        Intra Network    IP           20 xe-0/0/2.0    10.2.1.3
+10.2.2.4/31        Intra Network    IP           20 xe-0/0/3.0    10.2.1.5
+10.2.2.6/31        Intra Network    IP           20 xe-0/0/4.0    10.2.1.7
+10.2.2.8/31        Intra Network    IP           20 xe-0/0/5.0    10.2.1.9
+10.2.2.10/31       Intra Network    IP           20 xe-0/0/6.0    10.2.1.11
+
+Spine2
+root@Spine2> show ospf route 
+Topology default Route Table:
+
+Prefix             Path  Route      NH       Metric NextHop       Nexthop      
+                   Type  Type       Type            Interface     Address/LSP
+10.0.1.0           Intra Router     IP           20 xe-0/0/1.0    10.2.2.1
+                                                    xe-0/0/2.0    10.2.2.3
+                                                    xe-0/0/3.0    10.2.2.5
+                                                    xe-0/0/4.0    10.2.2.7
+                                                    xe-0/0/5.0    10.2.2.9
+                                                    xe-0/0/6.0    10.2.2.11
+10.0.1.1           Intra Router     IP           10 xe-0/0/1.0    10.2.2.1
+10.0.1.2           Intra Router     IP           10 xe-0/0/2.0    10.2.2.3
+10.0.1.3           Intra Router     IP           10 xe-0/0/3.0    10.2.2.5
+10.0.1.4           Intra Router     IP           10 xe-0/0/4.0    10.2.2.7
+10.0.1.5           Intra Router     IP           10 xe-0/0/5.0    10.2.2.9
+10.0.1.6           Intra Router     IP           10 xe-0/0/6.0    10.2.2.11
+10.0.1.0/32        Intra Network    IP           20 xe-0/0/1.0    10.2.2.1
+                                                    xe-0/0/2.0    10.2.2.3
+                                                    xe-0/0/3.0    10.2.2.5
+                                                    xe-0/0/4.0    10.2.2.7
+                                                    xe-0/0/5.0    10.2.2.9
+                                                    xe-0/0/6.0    10.2.2.11
+10.0.1.1/32        Intra Network    IP           10 xe-0/0/1.0    10.2.2.1
+10.0.1.2/32        Intra Network    IP           10 xe-0/0/2.0    10.2.2.3
+10.0.1.3/32        Intra Network    IP           10 xe-0/0/3.0    10.2.2.5
+10.0.1.4/32        Intra Network    IP           10 xe-0/0/4.0    10.2.2.7
+10.0.1.5/32        Intra Network    IP           10 xe-0/0/5.0    10.2.2.9
+10.0.1.6/32        Intra Network    IP           10 xe-0/0/6.0    10.2.2.11
+10.0.2.0/32        Intra Network    IP            0 lo0.0
+10.2.1.0/31        Intra Network    IP           20 xe-0/0/1.0    10.2.2.1
+10.2.1.2/31        Intra Network    IP           20 xe-0/0/2.0    10.2.2.3
+10.2.1.4/31        Intra Network    IP           20 xe-0/0/3.0    10.2.2.5
+10.2.1.6/31        Intra Network    IP           20 xe-0/0/4.0    10.2.2.7
+10.2.1.8/31        Intra Network    IP           20 xe-0/0/5.0    10.2.2.9
+10.2.1.10/31       Intra Network    IP           20 xe-0/0/6.0    10.2.2.11
+10.2.2.0/31        Intra Network    IP           10 xe-0/0/1.0
+10.2.2.2/31        Intra Network    IP           10 xe-0/0/2.0
+10.2.2.4/31        Intra Network    IP           10 xe-0/0/3.0
+10.2.2.6/31        Intra Network    IP           10 xe-0/0/4.0
+10.2.2.8/31        Intra Network    IP           10 xe-0/0/5.0
+10.2.2.10/31       Intra Network    IP           10 xe-0/0/6.0
+```
