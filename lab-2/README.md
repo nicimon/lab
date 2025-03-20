@@ -546,3 +546,42 @@ Router  *10.0.1.6         10.0.1.6         0x8000001a  2843  0x22 0x3fcd  84
 Router   10.0.2.0         10.0.2.0         0x8000002d   915  0x22 0x7b04 180
 ```
 </details>
+
+Пропингуем lo0 интерфейсы
+```text
+Leaf1 <--> Spine1
+root@Leaf1> ping 10.0.1.0 count 1    
+PING 10.0.1.0 (10.0.1.0): 56 data bytes
+64 bytes from 10.0.1.0: icmp_seq=0 ttl=64 time=135.997 ms
+
+Leaf1 <--> Spine2
+root@Leaf1> ping 10.0.2.0 count 1    
+PING 10.0.2.0 (10.0.2.0): 56 data bytes
+64 bytes from 10.0.2.0: icmp_seq=0 ttl=64 time=125.088 ms
+
+Leaf1 <--> Leaf2
+root@Leaf1> ping 10.0.1.2 count 1    
+PING 10.0.1.2 (10.0.1.2): 56 data bytes
+64 bytes from 10.0.1.2: icmp_seq=0 ttl=63 time=139.890 ms
+
+Leaf1 <--> Leaf3
+root@Leaf1> ping 10.0.1.3 count 1    
+PING 10.0.1.3 (10.0.1.3): 56 data bytes
+64 bytes from 10.0.1.3: icmp_seq=0 ttl=63 time=216.638 ms
+
+Leaf1 <--> Leaf4
+root@Leaf1> ping 10.0.1.4 count 1    
+PING 10.0.1.4 (10.0.1.4): 56 data bytes
+64 bytes from 10.0.1.4: icmp_seq=0 ttl=63 time=128.450 ms
+
+Leaf1 <--> BorderLeaf1
+root@Leaf1> ping 10.0.1.5 count 1    
+PING 10.0.1.5 (10.0.1.5): 56 data bytes
+64 bytes from 10.0.1.5: icmp_seq=0 ttl=63 time=117.313 ms
+
+Leaf1 <--> BorderLeaf1
+root@Leaf1> ping 10.0.1.6 count 1    
+PING 10.0.1.6 (10.0.1.6): 56 data bytes
+64 bytes from 10.0.1.6: icmp_seq=0 ttl=63 time=149.823 ms
+```
+
