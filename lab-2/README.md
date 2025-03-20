@@ -142,6 +142,7 @@ router-id 10.0.1.0;
 
 <details>
 <summary>Spine2</summary>
+
 root@Spine2> show configuration protocols ospf
 ```text
 area 0.0.0.0 {
@@ -175,6 +176,7 @@ router-id 10.0.2.0;
 
 <details>
 <summary>Leaf1</summary>
+
 root@Leaf1> show configuration protocols ospf 
 ```text
 area 0.0.0.0 {
