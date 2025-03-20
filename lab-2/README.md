@@ -140,6 +140,62 @@ router-id 10.0.1.0;
 ```
 </details>
 
+<details>
+<summary>Spine2</summary>
+root@Spine2> show configuration protocols ospf
+```text
+area 0.0.0.0 {
+    interface xe-0/0/1.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/2.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/3.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/4.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/5.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/6.0 {
+        interface-type p2p;
+    }
+    interface lo0.0;
+}
+reference-bandwidth 100g;
+
+{master:0}
+root@Spine2> show configuration routing-options 
+router-id 10.0.2.0;
+```
+</details>
+
+<details>
+<summary>Leaf1</summary>
+root@Leaf1> show configuration protocols ospf 
+```text
+area 0.0.0.0 {
+    interface xe-0/0/1.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/2.0 {
+        interface-type p2p;
+    }
+    interface lo0.0;
+}
+reference-bandwidth 100g;
+
+{master:0}
+root@Leaf1> show configuration routing-options 
+router-id 10.0.1.1;
+```
+</details>
+
+
+
 root@Spine1> show ospf database brief 
 ```text
     OSPF database, Area 0.0.0.0
