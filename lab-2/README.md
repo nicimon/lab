@@ -106,6 +106,38 @@ lo0.0                   up    up   inet     10.0.1.6            --> 0/0
 ```
 </details>
 
+Для настройки OSPF необходимо в секцию  protocols ospf указать зону и внести участвующие интерфейсы в процессе OSPF, а также указать router-id
+<details>
+<summary>Spine1</summary>
+
+root@Spine1> show configuration protocols ospf   
+area 0.0.0.0 {
+    interface xe-0/0/1.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/2.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/3.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/4.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/5.0 {
+        interface-type p2p;
+    }
+    interface xe-0/0/6.0 {
+        interface-type p2p;
+    }
+    interface lo0.0;
+}
+reference-bandwidth 100g;
+
+root@Spine1> show configuration routing-options 
+router-id 10.0.1.0;
+</details>
+
 root@Spine1> show ospf database brief 
 ```text
     OSPF database, Area 0.0.0.0
