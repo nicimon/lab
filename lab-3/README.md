@@ -293,7 +293,406 @@ Spine2.02-00                    0x54   0xe540      585 L1 L2
 Spine2.03-00                    0x53    0x91b      755 L1 L2
 Spine2.04-00                    0x53   0x2af6      851 L1 L2
   20 LSPs
-  ```
+ ```
+ Вывод show route protocol isis 
+<details>
+<summary>Spine1</summary>
+
+``` text
+root@Spine1> show route protocol isis 
+
+inet.0: 28 destinations, 28 routes (28 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+10.0.1.1/32        *[IS-IS/18] 18:26:34, metric 10
+                    >  to 10.2.1.1 via xe-0/0/1.0
+10.0.1.2/32        *[IS-IS/18] 18:17:06, metric 10
+                    >  to 10.2.1.3 via xe-0/0/2.0
+10.0.1.3/32        *[IS-IS/18] 18:16:07, metric 10
+                    >  to 10.2.1.5 via xe-0/0/3.0
+10.0.1.4/32        *[IS-IS/18] 18:14:15, metric 10
+                    >  to 10.2.1.7 via xe-0/0/4.0
+10.0.1.5/32        *[IS-IS/18] 18:13:16, metric 10
+                    >  to 10.2.1.9 via xe-0/0/5.0
+10.0.1.6/32        *[IS-IS/18] 18:12:29, metric 10
+                    >  to 10.2.1.11 via xe-0/0/6.0
+10.0.2.0/32        *[IS-IS/18] 18:12:03, metric 20
+                       to 10.2.1.1 via xe-0/0/1.0
+                       to 10.2.1.3 via xe-0/0/2.0
+                       to 10.2.1.5 via xe-0/0/3.0
+                    >  to 10.2.1.7 via xe-0/0/4.0
+                       to 10.2.1.9 via xe-0/0/5.0
+                       to 10.2.1.11 via xe-0/0/6.0
+10.2.2.0/31        *[IS-IS/18] 18:30:36, metric 20
+                    >  to 10.2.1.1 via xe-0/0/1.0
+10.2.2.2/31        *[IS-IS/18] 18:17:06, metric 20
+                    >  to 10.2.1.3 via xe-0/0/2.0
+10.2.2.4/31        *[IS-IS/18] 18:16:07, metric 20
+                    >  to 10.2.1.5 via xe-0/0/3.0
+10.2.2.6/31        *[IS-IS/18] 18:14:15, metric 20
+                    >  to 10.2.1.7 via xe-0/0/4.0
+10.2.2.8/31        *[IS-IS/18] 18:13:16, metric 20
+                    >  to 10.2.1.9 via xe-0/0/5.0
+10.2.2.10/31       *[IS-IS/18] 18:12:29, metric 20
+                    >  to 10.2.1.11 via xe-0/0/6.0
+```
+</details>
+
+<details>
+<summary>Spine2</summary>
+
+``` text
+root@Spine2> show route protocol isis 
+
+inet.0: 28 destinations, 28 routes (28 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+10.0.1.0/32        *[IS-IS/18] 18:14:33, metric 20
+                       to 10.2.2.1 via xe-0/0/1.0
+                       to 10.2.2.3 via xe-0/0/2.0
+                       to 10.2.2.5 via xe-0/0/3.0
+                       to 10.2.2.7 via xe-0/0/4.0
+                    >  to 10.2.2.9 via xe-0/0/5.0
+                       to 10.2.2.11 via xe-0/0/6.0
+10.0.1.1/32        *[IS-IS/18] 18:29:04, metric 10
+                    >  to 10.2.2.1 via xe-0/0/1.0
+10.0.1.2/32        *[IS-IS/18] 18:19:05, metric 10
+                    >  to 10.2.2.3 via xe-0/0/2.0
+10.0.1.3/32        *[IS-IS/18] 18:18:11, metric 10
+                    >  to 10.2.2.5 via xe-0/0/3.0
+10.0.1.4/32        *[IS-IS/18] 18:16:18, metric 10
+                    >  to 10.2.2.7 via xe-0/0/4.0
+10.0.1.5/32        *[IS-IS/18] 18:15:20, metric 10
+                    >  to 10.2.2.9 via xe-0/0/5.0
+10.0.1.6/32        *[IS-IS/18] 18:14:33, metric 10
+                    >  to 10.2.2.11 via xe-0/0/6.0
+10.2.1.0/31        *[IS-IS/18] 18:32:40, metric 20
+                    >  to 10.2.2.1 via xe-0/0/1.0
+10.2.1.2/31        *[IS-IS/18] 18:19:05, metric 20
+                    >  to 10.2.2.3 via xe-0/0/2.0
+10.2.1.4/31        *[IS-IS/18] 18:18:11, metric 20
+                    >  to 10.2.2.5 via xe-0/0/3.0
+10.2.1.6/31        *[IS-IS/18] 18:16:18, metric 20
+                    >  to 10.2.2.7 via xe-0/0/4.0
+10.2.1.8/31        *[IS-IS/18] 18:15:20, metric 20
+                    >  to 10.2.2.9 via xe-0/0/5.0
+10.2.1.10/31       *[IS-IS/18] 18:14:33, metric 20
+                    >  to 10.2.2.11 via xe-0/0/6.0
+```
+</details>
+
+<details>
+<summary>Leaf1</summary>
+
+``` text
+root@Leaf1> show route protocol isis 
+
+inet.0: 24 destinations, 24 routes (24 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+10.0.1.0/32        *[IS-IS/18] 18:31:28, metric 10
+                    >  to 10.2.1.0 via xe-0/0/1.0
+10.0.1.2/32        *[IS-IS/18] 18:20:52, metric 20
+                       to 10.2.1.0 via xe-0/0/1.0
+                    >  to 10.2.2.0 via xe-0/0/2.0
+10.0.1.3/32        *[IS-IS/18] 18:19:57, metric 20
+                       to 10.2.1.0 via xe-0/0/1.0
+                    >  to 10.2.2.0 via xe-0/0/2.0
+10.0.1.4/32        *[IS-IS/18] 18:18:04, metric 20
+                       to 10.2.1.0 via xe-0/0/1.0
+                    >  to 10.2.2.0 via xe-0/0/2.0
+10.0.1.5/32        *[IS-IS/18] 18:17:07, metric 20
+                       to 10.2.1.0 via xe-0/0/1.0
+                    >  to 10.2.2.0 via xe-0/0/2.0
+10.0.1.6/32        *[IS-IS/18] 18:16:20, metric 20
+                       to 10.2.1.0 via xe-0/0/1.0
+                    >  to 10.2.2.0 via xe-0/0/2.0
+10.0.2.0/32        *[IS-IS/18] 18:31:06, metric 10
+                    >  to 10.2.2.0 via xe-0/0/2.0
+10.2.1.2/31        *[IS-IS/18] 18:34:52, metric 20
+                    >  to 10.2.1.0 via xe-0/0/1.0
+10.2.1.4/31        *[IS-IS/18] 18:34:52, metric 20
+                    >  to 10.2.1.0 via xe-0/0/1.0
+10.2.1.6/31        *[IS-IS/18] 18:34:52, metric 20
+                    >  to 10.2.1.0 via xe-0/0/1.0
+10.2.1.8/31        *[IS-IS/18] 18:34:52, metric 20
+                    >  to 10.2.1.0 via xe-0/0/1.0
+10.2.1.10/31       *[IS-IS/18] 18:34:52, metric 20
+                    >  to 10.2.1.0 via xe-0/0/1.0
+10.2.2.2/31        *[IS-IS/18] 18:34:27, metric 20
+                    >  to 10.2.2.0 via xe-0/0/2.0
+10.2.2.4/31        *[IS-IS/18] 18:34:27, metric 20
+                    >  to 10.2.2.0 via xe-0/0/2.0
+10.2.2.6/31        *[IS-IS/18] 18:34:27, metric 20
+                    >  to 10.2.2.0 via xe-0/0/2.0
+10.2.2.8/31        *[IS-IS/18] 18:34:27, metric 20
+                    >  to 10.2.2.0 via xe-0/0/2.0
+10.2.2.10/31       *[IS-IS/18] 18:34:27, metric 20
+                    >  to 10.2.2.0 via xe-0/0/2.0
+```
+</details>
+
+<details>
+<summary>Leaf2</summary>
+
+``` text
+
+root@Leaf2> show route protocol isis 
+
+inet.0: 24 destinations, 24 routes (24 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+10.0.1.0/32        *[IS-IS/18] 18:22:05, metric 10
+                    >  to 10.2.1.2 via xe-0/0/1.0
+10.0.1.1/32        *[IS-IS/18] 18:21:35, metric 20
+                       to 10.2.1.2 via xe-0/0/1.0
+                    >  to 10.2.2.2 via xe-0/0/2.0
+10.0.1.3/32        *[IS-IS/18] 18:20:41, metric 20
+                       to 10.2.1.2 via xe-0/0/1.0
+                    >  to 10.2.2.2 via xe-0/0/2.0
+10.0.1.4/32        *[IS-IS/18] 18:18:48, metric 20
+                       to 10.2.1.2 via xe-0/0/1.0
+                    >  to 10.2.2.2 via xe-0/0/2.0
+10.0.1.5/32        *[IS-IS/18] 18:17:50, metric 20
+                       to 10.2.1.2 via xe-0/0/1.0
+                    >  to 10.2.2.2 via xe-0/0/2.0
+10.0.1.6/32        *[IS-IS/18] 18:17:03, metric 20
+                       to 10.2.1.2 via xe-0/0/1.0
+                    >  to 10.2.2.2 via xe-0/0/2.0
+10.0.2.0/32        *[IS-IS/18] 18:21:35, metric 10
+                    >  to 10.2.2.2 via xe-0/0/2.0
+10.2.1.0/31        *[IS-IS/18] 18:22:05, metric 20
+                    >  to 10.2.1.2 via xe-0/0/1.0
+10.2.1.4/31        *[IS-IS/18] 18:22:05, metric 20
+                    >  to 10.2.1.2 via xe-0/0/1.0
+10.2.1.6/31        *[IS-IS/18] 18:22:05, metric 20
+                    >  to 10.2.1.2 via xe-0/0/1.0
+10.2.1.8/31        *[IS-IS/18] 18:22:05, metric 20
+                    >  to 10.2.1.2 via xe-0/0/1.0
+10.2.1.10/31       *[IS-IS/18] 18:22:05, metric 20
+                    >  to 10.2.1.2 via xe-0/0/1.0
+10.2.2.0/31        *[IS-IS/18] 18:21:35, metric 20
+                    >  to 10.2.2.2 via xe-0/0/2.0
+10.2.2.4/31        *[IS-IS/18] 18:21:35, metric 20
+                    >  to 10.2.2.2 via xe-0/0/2.0
+10.2.2.6/31        *[IS-IS/18] 18:21:35, metric 20
+                    >  to 10.2.2.2 via xe-0/0/2.0
+10.2.2.8/31        *[IS-IS/18] 18:21:35, metric 20
+                    >  to 10.2.2.2 via xe-0/0/2.0
+10.2.2.10/31       *[IS-IS/18] 18:21:35, metric 20
+                    >  to 10.2.2.2 via xe-0/0/2.0
+```
+</details>
+
+<details>
+<summary>Leaf3</summary>
+
+``` text
+root@Leaf3> show route protocol isis 
+
+inet.0: 24 destinations, 24 routes (24 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+10.0.1.0/32        *[IS-IS/18] 18:21:39, metric 10
+                    >  to 10.2.1.4 via xe-0/0/1.0
+10.0.1.1/32        *[IS-IS/18] 18:21:14, metric 20
+                       to 10.2.1.4 via xe-0/0/1.0
+                    >  to 10.2.2.4 via xe-0/0/2.0
+10.0.1.2/32        *[IS-IS/18] 18:21:14, metric 20
+                       to 10.2.1.4 via xe-0/0/1.0
+                    >  to 10.2.2.4 via xe-0/0/2.0
+10.0.1.4/32        *[IS-IS/18] 18:19:20, metric 20
+                       to 10.2.1.4 via xe-0/0/1.0
+                    >  to 10.2.2.4 via xe-0/0/2.0
+10.0.1.5/32        *[IS-IS/18] 18:18:23, metric 20
+                       to 10.2.1.4 via xe-0/0/1.0
+                    >  to 10.2.2.4 via xe-0/0/2.0
+10.0.1.6/32        *[IS-IS/18] 18:17:36, metric 20
+                       to 10.2.1.4 via xe-0/0/1.0
+                    >  to 10.2.2.4 via xe-0/0/2.0
+10.0.2.0/32        *[IS-IS/18] 18:21:14, metric 10
+                    >  to 10.2.2.4 via xe-0/0/2.0
+10.2.1.0/31        *[IS-IS/18] 18:21:39, metric 20
+                    >  to 10.2.1.4 via xe-0/0/1.0
+10.2.1.2/31        *[IS-IS/18] 18:21:39, metric 20
+                    >  to 10.2.1.4 via xe-0/0/1.0
+10.2.1.6/31        *[IS-IS/18] 18:21:39, metric 20
+                    >  to 10.2.1.4 via xe-0/0/1.0
+10.2.1.8/31        *[IS-IS/18] 18:21:39, metric 20
+                    >  to 10.2.1.4 via xe-0/0/1.0
+10.2.1.10/31       *[IS-IS/18] 18:21:39, metric 20
+                    >  to 10.2.1.4 via xe-0/0/1.0
+10.2.2.0/31        *[IS-IS/18] 18:21:14, metric 20
+                    >  to 10.2.2.4 via xe-0/0/2.0
+10.2.2.2/31        *[IS-IS/18] 18:21:14, metric 20
+                    >  to 10.2.2.4 via xe-0/0/2.0
+10.2.2.6/31        *[IS-IS/18] 18:21:14, metric 20
+                    >  to 10.2.2.4 via xe-0/0/2.0
+10.2.2.8/31        *[IS-IS/18] 18:21:14, metric 20
+                    >  to 10.2.2.4 via xe-0/0/2.0
+10.2.2.10/31       *[IS-IS/18] 18:21:14, metric 20
+                    >  to 10.2.2.4 via xe-0/0/2.0
+```
+</details>
+
+<details>
+<summary>Leaf4</summary>
+
+``` text
+root@Leaf4> show route protocol isis 
+
+inet.0: 24 destinations, 24 routes (24 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+10.0.1.0/32        *[IS-IS/18] 18:20:14, metric 10
+                    >  to 10.2.1.6 via xe-0/0/1.0
+10.0.1.1/32        *[IS-IS/18] 18:19:47, metric 20
+                       to 10.2.1.6 via xe-0/0/1.0
+                    >  to 10.2.2.6 via xe-0/0/2.0
+10.0.1.2/32        *[IS-IS/18] 18:19:47, metric 20
+                       to 10.2.1.6 via xe-0/0/1.0
+                    >  to 10.2.2.6 via xe-0/0/2.0
+10.0.1.3/32        *[IS-IS/18] 18:19:47, metric 20
+                       to 10.2.1.6 via xe-0/0/1.0
+                    >  to 10.2.2.6 via xe-0/0/2.0
+10.0.1.5/32        *[IS-IS/18] 18:18:50, metric 20
+                       to 10.2.1.6 via xe-0/0/1.0
+                    >  to 10.2.2.6 via xe-0/0/2.0
+10.0.1.6/32        *[IS-IS/18] 18:18:03, metric 20
+                       to 10.2.1.6 via xe-0/0/1.0
+                    >  to 10.2.2.6 via xe-0/0/2.0
+10.0.2.0/32        *[IS-IS/18] 18:19:47, metric 10
+                    >  to 10.2.2.6 via xe-0/0/2.0
+10.2.1.0/31        *[IS-IS/18] 18:20:14, metric 20
+                    >  to 10.2.1.6 via xe-0/0/1.0
+10.2.1.2/31        *[IS-IS/18] 18:20:14, metric 20
+                    >  to 10.2.1.6 via xe-0/0/1.0
+10.2.1.4/31        *[IS-IS/18] 18:20:14, metric 20
+                    >  to 10.2.1.6 via xe-0/0/1.0
+10.2.1.8/31        *[IS-IS/18] 18:20:14, metric 20
+                    >  to 10.2.1.6 via xe-0/0/1.0
+10.2.1.10/31       *[IS-IS/18] 18:20:14, metric 20
+                    >  to 10.2.1.6 via xe-0/0/1.0
+10.2.2.0/31        *[IS-IS/18] 18:19:47, metric 20
+                    >  to 10.2.2.6 via xe-0/0/2.0
+10.2.2.2/31        *[IS-IS/18] 18:19:47, metric 20
+                    >  to 10.2.2.6 via xe-0/0/2.0
+10.2.2.4/31        *[IS-IS/18] 18:19:47, metric 20
+                    >  to 10.2.2.6 via xe-0/0/2.0
+10.2.2.8/31        *[IS-IS/18] 18:19:47, metric 20
+                    >  to 10.2.2.6 via xe-0/0/2.0
+10.2.2.10/31       *[IS-IS/18] 18:19:47, metric 20
+                    >  to 10.2.2.6 via xe-0/0/2.0
+```
+</details>
+
+<details>
+<summary>BorderLeaf1</summary>
+
+``` text
+root@BorderLeaf1> show route protocol isis 
+
+inet.0: 24 destinations, 24 routes (24 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+10.0.1.0/32        *[IS-IS/18] 18:19:40, metric 10
+                    >  to 10.2.1.8 via xe-0/0/1.0
+10.0.1.1/32        *[IS-IS/18] 18:19:15, metric 20
+                       to 10.2.1.8 via xe-0/0/1.0
+                    >  to 10.2.2.8 via xe-0/0/2.0
+10.0.1.2/32        *[IS-IS/18] 18:19:15, metric 20
+                       to 10.2.1.8 via xe-0/0/1.0
+                    >  to 10.2.2.8 via xe-0/0/2.0
+10.0.1.3/32        *[IS-IS/18] 18:19:15, metric 20
+                       to 10.2.1.8 via xe-0/0/1.0
+                    >  to 10.2.2.8 via xe-0/0/2.0
+10.0.1.4/32        *[IS-IS/18] 18:19:15, metric 20
+                       to 10.2.1.8 via xe-0/0/1.0
+                    >  to 10.2.2.8 via xe-0/0/2.0
+10.0.1.6/32        *[IS-IS/18] 18:18:28, metric 20
+                       to 10.2.1.8 via xe-0/0/1.0
+                    >  to 10.2.2.8 via xe-0/0/2.0
+10.0.2.0/32        *[IS-IS/18] 18:19:15, metric 10
+                    >  to 10.2.2.8 via xe-0/0/2.0
+10.2.1.0/31        *[IS-IS/18] 18:19:40, metric 20
+                    >  to 10.2.1.8 via xe-0/0/1.0
+10.2.1.2/31        *[IS-IS/18] 18:19:40, metric 20
+                    >  to 10.2.1.8 via xe-0/0/1.0
+10.2.1.4/31        *[IS-IS/18] 18:19:40, metric 20
+                    >  to 10.2.1.8 via xe-0/0/1.0
+10.2.1.6/31        *[IS-IS/18] 18:19:40, metric 20
+                    >  to 10.2.1.8 via xe-0/0/1.0
+10.2.1.10/31       *[IS-IS/18] 18:19:40, metric 20
+                    >  to 10.2.1.8 via xe-0/0/1.0
+10.2.2.0/31        *[IS-IS/18] 18:19:15, metric 20
+                    >  to 10.2.2.8 via xe-0/0/2.0
+10.2.2.2/31        *[IS-IS/18] 18:19:15, metric 20
+                    >  to 10.2.2.8 via xe-0/0/2.0
+10.2.2.4/31        *[IS-IS/18] 18:19:15, metric 20
+                    >  to 10.2.2.8 via xe-0/0/2.0
+10.2.2.6/31        *[IS-IS/18] 18:19:15, metric 20
+                    >  to 10.2.2.8 via xe-0/0/2.0
+10.2.2.10/31       *[IS-IS/18] 18:19:15, metric 20
+                    >  to 10.2.2.8 via xe-0/0/2.0
+```
+</details>
+
+<details>
+<summary>BorderLeaf2</summary>
+
+``` text
+root@BorderLeaf2> show route protocol isis 
+
+inet.0: 24 destinations, 24 routes (24 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+10.0.1.0/32        *[IS-IS/18] 18:19:21, metric 10
+                    >  to 10.2.1.10 via xe-0/0/1.0
+10.0.1.1/32        *[IS-IS/18] 18:18:55, metric 20
+                       to 10.2.1.10 via xe-0/0/1.0
+                    >  to 10.2.2.10 via xe-0/0/2.0
+10.0.1.2/32        *[IS-IS/18] 18:18:55, metric 20
+                       to 10.2.1.10 via xe-0/0/1.0
+                    >  to 10.2.2.10 via xe-0/0/2.0
+10.0.1.3/32        *[IS-IS/18] 18:18:55, metric 20
+                       to 10.2.1.10 via xe-0/0/1.0
+                    >  to 10.2.2.10 via xe-0/0/2.0
+10.0.1.4/32        *[IS-IS/18] 18:18:55, metric 20
+                       to 10.2.1.10 via xe-0/0/1.0
+                    >  to 10.2.2.10 via xe-0/0/2.0
+10.0.1.5/32        *[IS-IS/18] 18:18:55, metric 20
+                       to 10.2.1.10 via xe-0/0/1.0
+                    >  to 10.2.2.10 via xe-0/0/2.0
+10.0.2.0/32        *[IS-IS/18] 18:18:55, metric 10
+                    >  to 10.2.2.10 via xe-0/0/2.0
+10.2.1.0/31        *[IS-IS/18] 18:19:21, metric 20
+                    >  to 10.2.1.10 via xe-0/0/1.0
+10.2.1.2/31        *[IS-IS/18] 18:19:21, metric 20
+                    >  to 10.2.1.10 via xe-0/0/1.0
+10.2.1.4/31        *[IS-IS/18] 18:19:21, metric 20
+                    >  to 10.2.1.10 via xe-0/0/1.0
+10.2.1.6/31        *[IS-IS/18] 18:19:21, metric 20
+                    >  to 10.2.1.10 via xe-0/0/1.0
+10.2.1.8/31        *[IS-IS/18] 18:19:21, metric 20
+                    >  to 10.2.1.10 via xe-0/0/1.0
+10.2.2.0/31        *[IS-IS/18] 18:18:55, metric 20
+                    >  to 10.2.2.10 via xe-0/0/2.0
+10.2.2.2/31        *[IS-IS/18] 18:18:55, metric 20
+                    >  to 10.2.2.10 via xe-0/0/2.0
+10.2.2.4/31        *[IS-IS/18] 18:18:55, metric 20
+                    >  to 10.2.2.10 via xe-0/0/2.0
+10.2.2.6/31        *[IS-IS/18] 18:18:55, metric 20
+                    >  to 10.2.2.10 via xe-0/0/2.0
+10.2.2.8/31        *[IS-IS/18] 18:18:55, metric 20
+                    >  to 10.2.2.10 via xe-0/0/2.0
+```
+</details>
+
+
+
+
+
+
 Вывод ping и traceroute от Leaf1 - BorderLeaf2  
 ```text
 root@Leaf1> ping 10.0.1.6 
