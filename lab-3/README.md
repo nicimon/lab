@@ -22,8 +22,12 @@
 | Leaf4       | 10.0.1.4 | 49.0078.0100.0000.1004.00 |
 | BorderLeaf1 | 10.0.1.5 | 49.0078.0100.0000.1005.00 |
 | BorderLeaf2 | 10.0.1.6 | 49.0078.0100.0000.1006.00 |
+---
+Для настройки IS-IS необходимо:
+1. В интерфейсе участвующий в процессе IS-IS указать **family iso**. 
+2. В секцию protocols isis указать интерфейсы, запретить Level1, а также указать на Level2 wide metrics
 
-Настраиваем интерфейсы
+Пример настройки интерфейса
 ```text
 root@Leaf1> show configuration interfaces xe-0/0/1  
 unit 0 {
@@ -34,6 +38,7 @@ unit 0 {
     family iso;
 }
 ```
+Пример настройки в секции протокола IS-IS
 ```text
 root@Leaf1> show configuration protocols isis 
 interface xe-0/0/1.0 {
@@ -47,6 +52,8 @@ interface lo0.0 {
 }
 level 2 wide-metrics-only;
 ```
+Вывод IS-IS соседства
+
 ```text
 root@Spine1> show isis adjacency 
 Interface             System         L State        Hold (secs) SNPA
