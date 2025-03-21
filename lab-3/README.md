@@ -713,3 +713,1201 @@ traceroute to 10.0.1.6 (10.0.1.6), 30 hops max, 40 byte packets
  2  * * *
  3  10.0.1.6 (10.0.1.6)  189.421 ms  400.694 ms  305.938 ms
 ```
+---
+Конфигурация оборудования
+
+<details>
+<summary>Spine1</summary>
+
+```text
+root@Spine1> show configuration 
+## Last commit: 2025-03-21 12:04:48 UTC by root
+version 20.3R1.8;
+system {
+    host-name Spine1;
+    root-authentication {
+        encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"; ## SECRET-DATA
+        ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+    }
+    login {
+        user vagrant {
+            uid 2000;
+            class super-user;
+            authentication {
+                ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+            }
+        }
+    }
+    services {
+        ssh {
+            root-login allow;
+        }
+        netconf {
+            ssh;
+        }
+        rest {
+            http {
+                port 8080;
+            }
+            enable-explorer;
+        }
+    }
+    syslog {                            
+        user * {
+            any emergency;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+    }
+    extensions {
+        providers {
+            juniper {
+                license-type juniper deployment-scope commercial;
+            }
+            chef {
+                license-type juniper deployment-scope commercial;
+            }
+        }
+    }
+}
+interfaces {                            
+    xe-0/0/1 {
+        unit 0 {
+            description "--- Spine1 - Leaf1 ---";
+            family inet {
+                address 10.2.1.0/31;
+            }
+            family iso;
+        }
+    }
+    xe-0/0/2 {
+        unit 0 {
+            description "--- Spine1 - Leaf2 ---";
+            family inet {
+                address 10.2.1.2/31;
+            }
+            family iso;
+        }
+    }
+    xe-0/0/3 {
+        unit 0 {
+            description "--- Spine1 - Leaf3 ---";
+            family inet {
+                address 10.2.1.4/31;    
+            }
+            family iso;
+        }
+    }
+    xe-0/0/4 {
+        unit 0 {
+            description "--- Spine1 - Leaf4 ---";
+            family inet {
+                address 10.2.1.6/31;
+            }
+            family iso;
+        }
+    }
+    xe-0/0/5 {
+        unit 0 {
+            description "--- Spine1 - BorderLeaf1 ---";
+            family inet {
+                address 10.2.1.8/31;
+            }
+            family iso;
+        }
+    }
+    xe-0/0/6 {                          
+        unit 0 {
+            description "--- Spine1 - BorderLeaf2 ---";
+            family inet {
+                address 10.2.1.10/31;
+            }
+            family iso;
+        }
+    }
+    em0 {
+        unit 0 {
+            family inet {
+                dhcp;
+            }
+        }
+    }
+    em1 {
+        unit 0 {
+            family inet {
+                address 169.254.0.2/24;
+            }
+        }
+    }
+    lo0 {                               
+        unit 0 {
+            family inet {
+                address 10.0.1.0/32;
+            }
+            family iso {
+                address 49.0078.0100.0000.1000.00;
+            }
+        }
+    }
+}
+forwarding-options {
+    storm-control-profiles default {
+        all;
+    }
+}
+routing-options {
+    router-id 10.0.1.0;
+}
+protocols {
+    isis {
+        interface xe-0/0/1.0 {
+            level 1 disable;
+        }                               
+        interface xe-0/0/2.0 {
+            level 1 disable;
+        }
+        interface xe-0/0/3.0 {
+            level 1 disable;
+        }
+        interface xe-0/0/4.0 {
+            level 1 disable;
+        }
+        interface xe-0/0/5.0 {
+            level 1 disable;
+        }
+        interface xe-0/0/6.0 {
+            level 1 disable;
+        }
+        interface lo0.0 {
+            level 1 disable;
+        }
+        level 2 wide-metrics-only;
+    }
+    igmp-snooping {
+        vlan default;
+    }                                   
+}
+vlans {
+    default {
+        vlan-id 1;
+    }
+}
+
+{master:0}
+
+```
+</details>
+
+<details>
+<summary>Spine2</summary>
+
+```text
+
+root@Spine2# show 
+## Last changed: 2025-03-21 12:09:21 UTC
+version 20.3R1.8;
+system {
+    host-name Spine2;
+    root-authentication {
+        encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"; ## SECRET-DATA
+        ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+    }
+    login {
+        user vagrant {
+            uid 2000;
+            class super-user;
+            authentication {
+                ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+            }
+        }
+    }
+    services {
+        ssh {
+            root-login allow;
+        }
+        netconf {
+            ssh;
+        }
+        rest {
+            http {
+                port 8080;
+            }
+            enable-explorer;
+        }
+    }
+    syslog {                            
+        user * {
+            any emergency;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+    }
+    extensions {
+        providers {
+            juniper {
+                license-type juniper deployment-scope commercial;
+            }
+            chef {
+                license-type juniper deployment-scope commercial;
+            }
+        }
+    }
+}
+interfaces {                            
+    xe-0/0/1 {
+        unit 0 {
+            description "--- Spine2 - Leaf1 ---";
+            family inet {
+                address 10.2.2.0/31;
+            }
+            family iso;
+        }
+    }
+    xe-0/0/2 {
+        unit 0 {
+            description "--- Spine2 - Leaf2 ---";
+            family inet {
+                address 10.2.2.2/31;
+            }
+            family iso;
+        }
+    }
+    xe-0/0/3 {
+        unit 0 {
+            description "--- Spine2 - Leaf3 ---";
+            family inet {
+                address 10.2.2.4/31;    
+            }
+            family iso;
+        }
+    }
+    xe-0/0/4 {
+        unit 0 {
+            description "--- Spine2 - Leaf4 ---";
+            family inet {
+                address 10.2.2.6/31;
+            }
+            family iso;
+        }
+    }
+    xe-0/0/5 {
+        unit 0 {
+            description "--- Spine2 - BorderLeaf1 ---";
+            family inet {
+                address 10.2.2.8/31;
+            }
+            family iso;
+        }
+    }
+    xe-0/0/6 {                          
+        unit 0 {
+            description "--- Spine2 - BorderLeaf2 ---";
+            family inet {
+                address 10.2.2.10/31;
+            }
+            family iso;
+        }
+    }
+    em0 {
+        unit 0 {
+            family inet {
+                dhcp;
+            }
+        }
+    }
+    em1 {
+        unit 0 {
+            family inet {
+                address 169.254.0.2/24;
+            }
+        }
+    }
+    lo0 {                               
+        unit 0 {
+            family inet {
+                address 10.0.2.0/32;
+            }
+            family iso {
+                address 49.0078.0100.0000.2000.00;
+            }
+        }
+    }
+}
+forwarding-options {
+    storm-control-profiles default {
+        all;
+    }
+}
+routing-options {
+    router-id 10.0.2.0;
+}
+protocols {
+    isis {
+        interface xe-0/0/1.0 {
+            level 1 disable;
+        }                               
+        interface xe-0/0/2.0 {
+            level 1 disable;
+        }
+        interface xe-0/0/3.0 {
+            level 1 disable;
+        }
+        interface xe-0/0/4.0 {
+            level 1 disable;
+        }
+        interface xe-0/0/5.0 {
+            level 1 disable;
+        }
+        interface xe-0/0/6.0 {
+            level 1 disable;
+        }
+        interface lo0.0 {
+            level 1 disable;
+        }
+        level 2 wide-metrics-only;
+    }
+    igmp-snooping {
+        vlan default;
+    }                                   
+}
+vlans {
+    default {
+        vlan-id 1;
+    }
+}
+```
+</details>
+
+<details>
+<summary>Leaf1</summary>
+
+```text
+root@Leaf1> show configuration 
+## Last commit: 2025-03-21 12:14:11 UTC by root
+version 20.3R1.8;
+system {
+    host-name Leaf1;
+    root-authentication {
+        encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"; ## SECRET-DATA
+        ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+    }
+    login {
+        user vagrant {
+            uid 2000;
+            class super-user;
+            authentication {
+                ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+            }
+        }
+    }
+    services {
+        ssh {
+            root-login allow;
+        }
+        netconf {
+            ssh;
+        }
+        rest {
+            http {
+                port 8080;
+            }
+            enable-explorer;
+        }
+    }
+    syslog {                            
+        user * {
+            any emergency;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+    }
+    extensions {
+        providers {
+            juniper {
+                license-type juniper deployment-scope commercial;
+            }
+            chef {
+                license-type juniper deployment-scope commercial;
+            }
+        }
+    }
+}
+interfaces {                            
+    xe-0/0/1 {
+        unit 0 {
+            description "--- Leaf1 - Spine1  ---";
+            family inet {
+                address 10.2.1.1/31;
+            }
+            family iso;
+        }
+    }
+    xe-0/0/2 {
+        unit 0 {
+            description "--- Leaf1 - Spine2  ---";
+            family inet {
+                address 10.2.2.1/31;
+            }
+            family iso;
+        }
+    }
+    em0 {
+        unit 0 {
+            family inet {
+                dhcp;
+            }                           
+        }
+    }
+    em1 {
+        unit 0 {
+            family inet {
+                address 169.254.0.2/24;
+            }
+        }
+    }
+    lo0 {
+        unit 0 {
+            family inet {
+                address 10.0.1.1/32;
+            }
+            family iso {
+                address 49.0078.0100.0000.1001.00;
+            }
+        }
+    }
+}
+forwarding-options {
+    storm-control-profiles default {
+        all;                            
+    }
+}
+routing-options {
+    router-id 10.0.1.1;
+}
+protocols {
+    isis {
+        interface xe-0/0/1.0 {
+            level 1 disable;
+        }
+        interface xe-0/0/2.0 {
+            level 1 disable;
+        }
+        interface lo0.0 {
+            level 1 disable;
+        }
+        level 2 wide-metrics-only;
+    }
+    igmp-snooping {
+        vlan default;
+    }
+}
+vlans {                                 
+    default {
+        vlan-id 1;
+    }
+}
+
+{master:0}
+```
+</details>
+
+<details>
+<summary>Leaf2</summary>
+
+```text
+root@Leaf2> show configuration 
+## Last commit: 2025-03-21 12:17:51 UTC by root
+version 20.3R1.8;
+system {
+    host-name Leaf2;
+    root-authentication {
+        encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"; ## SECRET-DATA
+        ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+    }
+    login {
+        user vagrant {
+            uid 2000;
+            class super-user;
+            authentication {
+                ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+            }
+        }
+    }
+    services {
+        ssh {
+            root-login allow;
+        }
+        netconf {
+            ssh;
+        }
+        rest {
+            http {
+                port 8080;
+            }
+            enable-explorer;
+        }
+    }
+    syslog {                            
+        user * {
+            any emergency;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+    }
+    extensions {
+        providers {
+            juniper {
+                license-type juniper deployment-scope commercial;
+            }
+            chef {
+                license-type juniper deployment-scope commercial;
+            }
+        }
+    }
+}
+interfaces {                            
+    xe-0/0/1 {
+        unit 0 {
+            description "--- Leaf2 - Spine1  ---";
+            family inet {
+                address 10.2.1.3/31;
+            }
+            family iso;
+        }
+    }
+    xe-0/0/2 {
+        unit 0 {
+            description "--- Leaf2 - Spine2  ---";
+            family inet {
+                address 10.2.2.3/31;
+            }
+            family iso;
+        }
+    }
+    em0 {
+        unit 0 {
+            family inet {
+                dhcp;
+            }                           
+        }
+    }
+    em1 {
+        unit 0 {
+            family inet {
+                address 169.254.0.2/24;
+            }
+        }
+    }
+    lo0 {
+        unit 0 {
+            family inet {
+                address 10.0.1.2/32;
+            }
+            family iso {
+                address 49.0078.0100.0000.1002.00;
+            }
+        }
+    }
+}
+forwarding-options {
+    storm-control-profiles default {
+        all;                            
+    }
+}
+routing-options {
+    router-id 10.0.1.2;
+}
+protocols {
+    isis {
+        interface xe-0/0/1.0 {
+            level 1 disable;
+        }
+        interface xe-0/0/2.0 {
+            level 1 disable;
+        }
+        interface lo0.0 {
+            level 1 disable;
+        }
+        level 2 wide-metrics-only;
+    }
+    igmp-snooping {
+        vlan default;
+    }
+}
+vlans {                                 
+    default {
+        vlan-id 1;
+    }
+}
+
+{master:0}
+```
+</details>
+
+<details>
+<summary>Leaf3</summary>
+
+```text
+root@Leaf3> show configuration 
+## Last commit: 2025-03-21 12:17:55 UTC by root
+version 20.3R1.8;
+system {
+    host-name Leaf3;
+    root-authentication {
+        encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"; ## SECRET-DATA
+        ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+    }
+    login {
+        user vagrant {
+            uid 2000;
+            class super-user;
+            authentication {
+                ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+            }
+        }
+    }
+    services {
+        ssh {
+            root-login allow;
+        }
+        netconf {
+            ssh;
+        }
+        rest {
+            http {
+                port 8080;
+            }
+            enable-explorer;
+        }
+    }
+    syslog {                            
+        user * {
+            any emergency;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+    }
+    extensions {
+        providers {
+            juniper {
+                license-type juniper deployment-scope commercial;
+            }
+            chef {
+                license-type juniper deployment-scope commercial;
+            }
+        }
+    }
+}
+interfaces {                            
+    xe-0/0/1 {
+        unit 0 {
+            description "--- Leaf3 - Spine1  ---";
+            family inet {
+                address 10.2.1.5/31;
+            }
+            family iso;
+        }
+    }
+    xe-0/0/2 {
+        unit 0 {
+            description "--- Leaf3 - Spine2  ---";
+            family inet {
+                address 10.2.2.5/31;
+            }
+            family iso;
+        }
+    }
+    em0 {
+        unit 0 {
+            family inet {
+                dhcp;
+            }                           
+        }
+    }
+    em1 {
+        unit 0 {
+            family inet {
+                address 169.254.0.2/24;
+            }
+        }
+    }
+    lo0 {
+        unit 0 {
+            family inet {
+                address 10.0.1.3/32;
+            }
+            family iso {
+                address 49.0078.0100.0000.1003.00;
+            }
+        }
+    }
+}
+forwarding-options {
+    storm-control-profiles default {
+        all;                            
+    }
+}
+routing-options {
+    router-id 10.0.1.3;
+}
+protocols {
+    isis {
+        interface xe-0/0/1.0 {
+            level 1 disable;
+        }
+        interface xe-0/0/2.0 {
+            level 1 disable;
+        }
+        interface lo0.0 {
+            level 1 disable;
+        }
+        level 2 wide-metrics-only;
+    }
+    igmp-snooping {
+        vlan default;
+    }
+}
+vlans {                                 
+    default {
+        vlan-id 1;
+    }
+}
+
+{master:0}
+```
+</details>
+
+<details>
+<summary>Leaf4</summary>
+
+```text
+root@Leaf4> show configuration 
+## Last commit: 2025-03-21 12:17:55 UTC by root
+version 20.3R1.8;
+system {
+    host-name Leaf4;
+    root-authentication {
+        encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"; ## SECRET-DATA
+        ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+    }
+    login {
+        user vagrant {
+            uid 2000;
+            class super-user;
+            authentication {
+                ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+            }
+        }
+    }
+    services {
+        ssh {
+            root-login allow;
+        }
+        netconf {
+            ssh;
+        }
+        rest {
+            http {
+                port 8080;
+            }
+            enable-explorer;
+        }
+    }
+    syslog {                            
+        user * {
+            any emergency;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+    }
+    extensions {
+        providers {
+            juniper {
+                license-type juniper deployment-scope commercial;
+            }
+            chef {
+                license-type juniper deployment-scope commercial;
+            }
+        }
+    }
+}
+interfaces {                            
+    xe-0/0/1 {
+        unit 0 {
+            description "--- Leaf4 - Spine1  ---";
+            family inet {
+                address 10.2.1.7/31;
+            }
+            family iso;
+        }
+    }
+    xe-0/0/2 {
+        unit 0 {
+            description "--- Leaf4 - Spine2  ---";
+            family inet {
+                address 10.2.2.7/31;
+            }
+            family iso;
+        }
+    }
+    em0 {
+        unit 0 {
+            family inet {
+                dhcp;
+            }                           
+        }
+    }
+    em1 {
+        unit 0 {
+            family inet {
+                address 169.254.0.2/24;
+            }
+        }
+    }
+    lo0 {
+        unit 0 {
+            family inet {
+                address 10.0.1.4/32;
+            }
+            family iso {
+                address 49.0078.0100.0000.1004.00;
+            }
+        }
+    }
+}
+forwarding-options {
+    storm-control-profiles default {
+        all;                            
+    }
+}
+routing-options {
+    router-id 10.0.1.4;
+}
+protocols {
+    isis {
+        interface xe-0/0/1.0 {
+            level 1 disable;
+        }
+        interface xe-0/0/2.0 {
+            level 1 disable;
+        }
+        interface lo0.0 {
+            level 1 disable;
+        }
+        level 2 wide-metrics-only;
+    }
+    igmp-snooping {
+        vlan default;
+    }
+}
+vlans {                                 
+    default {
+        vlan-id 1;
+    }
+}
+
+{master:0}
+```
+</details>
+
+<details>
+<summary>BorderLeaf1</summary>
+
+```text
+root@BorderLeaf1> show configuration 
+## Last commit: 2025-03-21 12:17:55 UTC by root
+version 20.3R1.8;
+system {
+    host-name BorderLeaf1;
+    root-authentication {
+        encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"; ## SECRET-DATA
+        ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+    }
+    login {
+        user vagrant {
+            uid 2000;
+            class super-user;
+            authentication {
+                ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+            }
+        }
+    }
+    services {
+        ssh {
+            root-login allow;
+        }
+        netconf {
+            ssh;
+        }
+        rest {
+            http {
+                port 8080;
+            }
+            enable-explorer;
+        }
+    }
+    syslog {                            
+        user * {
+            any emergency;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+    }
+    extensions {
+        providers {
+            juniper {
+                license-type juniper deployment-scope commercial;
+            }
+            chef {
+                license-type juniper deployment-scope commercial;
+            }
+        }
+    }
+}
+interfaces {                            
+    xe-0/0/1 {
+        unit 0 {
+            description "--- BorderLeaf1 - Spine1  ---";
+            family inet {
+                address 10.2.1.9/31;
+            }
+            family iso;
+        }
+    }
+    xe-0/0/2 {
+        unit 0 {
+            description "--- BorderLeaf1 - Spine2  ---";
+            family inet {
+                address 10.2.2.9/31;
+            }
+            family iso;
+        }
+    }
+    em0 {
+        unit 0 {
+            family inet {
+                dhcp;
+            }                           
+        }
+    }
+    em1 {
+        unit 0 {
+            family inet {
+                address 169.254.0.2/24;
+            }
+        }
+    }
+    lo0 {
+        unit 0 {
+            family inet {
+                address 10.0.1.5/32;
+            }
+            family iso {
+                address 49.0078.0100.0000.1005.00;
+            }
+        }
+    }
+}
+forwarding-options {
+    storm-control-profiles default {
+        all;                            
+    }
+}
+routing-options {
+    router-id 10.0.1.5;
+}
+protocols {
+    isis {
+        interface xe-0/0/1.0 {
+            level 1 disable;
+        }
+        interface xe-0/0/2.0 {
+            level 1 disable;
+        }
+        interface lo0.0 {
+            level 1 disable;
+        }
+        level 2 wide-metrics-only;
+    }
+    igmp-snooping {
+        vlan default;
+    }
+}
+vlans {                                 
+    default {
+        vlan-id 1;
+    }
+}
+
+{master:0}
+```
+</details>
+
+<details>
+<summary>BorderLeaf2</summary>
+
+```text
+root@BorderLeaf2# show 
+## Last changed: 2025-03-21 11:58:48 UTC
+version 20.3R1.8;
+system {
+    host-name BorderLeaf2;
+    root-authentication {
+        encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"; ## SECRET-DATA
+        ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+    }
+    login {
+        user vagrant {
+            uid 2000;
+            class super-user;
+            authentication {
+                ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"; ## SECRET-DATA
+            }
+        }
+    }
+    services {
+        ssh {
+            root-login allow;
+        }
+        netconf {
+            ssh;
+        }
+        rest {
+            http {
+                port 8080;
+            }
+            enable-explorer;
+        }
+    }
+    syslog {                            
+        user * {
+            any emergency;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+    }
+    extensions {
+        providers {
+            juniper {
+                license-type juniper deployment-scope commercial;
+            }
+            chef {
+                license-type juniper deployment-scope commercial;
+            }
+        }
+    }
+}
+interfaces {                            
+    xe-0/0/1 {
+        unit 0 {
+            family inet {
+                address 10.2.1.11/31;
+            }
+            family iso;
+        }
+    }
+    xe-0/0/2 {
+        unit 0 {
+            family inet {
+                address 10.2.2.11/31;
+            }
+            family iso;
+        }
+    }
+    em0 {
+        unit 0 {
+            family inet {
+                dhcp;
+            }
+        }
+    }                                   
+    em1 {
+        unit 0 {
+            family inet {
+                address 169.254.0.2/24;
+            }
+        }
+    }
+    lo0 {
+        unit 0 {
+            family inet {
+                address 10.0.1.6/32;
+            }
+            family iso {
+                address 49.0078.0100.0000.1006.00;
+            }
+        }
+    }
+}
+forwarding-options {
+    storm-control-profiles default {
+        all;
+    }
+}                                       
+routing-options {
+    router-id 10.0.1.6;
+}
+protocols {
+    isis {
+        interface xe-0/0/1.0 {
+            level 1 disable;
+        }
+        interface xe-0/0/2.0 {
+            level 1 disable;
+        }
+        interface lo0.0 {
+            level 1 disable;
+        }
+        level 2 wide-metrics-only;
+    }
+    igmp-snooping {
+        vlan default;
+    }
+}
+vlans {
+    default {
+        vlan-id 1;                      
+    }
+}
+```
+</details>
