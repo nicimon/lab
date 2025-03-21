@@ -38,6 +38,17 @@ unit 0 {
     family iso;
 }
 ```
+``` text
+root@Leaf1> show configuration interfaces lo0 
+unit 0 {
+    family inet {
+        address 10.0.1.1/32;
+    }
+    family iso {
+        address 49.0078.0100.0000.1001.00;
+    }
+}
+```
 Пример настройки в секции протокола IS-IS
 ```text
 root@Leaf1> show configuration protocols isis 
