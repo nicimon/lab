@@ -260,3 +260,57 @@ xe-0/0/1.0            2   0x1 Disabled          Spine1.05              10/10
 xe-0/0/2.0            2   0x2 Disabled          BorderLeaf2.02         10/10
 ```
 </details>
+
+Вывод isis database
+
+```text
+root@Leaf1> show isis database 
+IS-IS level 1 link-state database:
+LSP ID                      Sequence Checksum Lifetime Attributes
+Leaf1.00-00                     0x56   0xf3a5      638 L1 L2
+  1 LSPs
+
+IS-IS level 2 link-state database:
+LSP ID                      Sequence Checksum Lifetime Attributes
+Spine1.00-00                    0x5a   0xe7ea      769 L1 L2
+Spine1.02-00                    0x53   0xf74f      642 L1 L2
+Spine1.03-00                    0x53   0x192b      928 L1 L2
+Spine1.04-00                    0x52   0x3c06      642 L1 L2
+Spine1.05-00                    0x52   0x49f6      770 L1 L2
+Leaf1.00-00                     0x58   0x8a71      418 L1 L2
+Leaf2.00-00                     0x57   0x9269      859 L1 L2
+Leaf2.02-00                     0x53   0xe55e      631 L1 L2
+Leaf2.03-00                     0x53   0x1023      859 L1 L2
+Leaf3.00-00                     0x56   0x449d      960 L1 L2
+Leaf4.00-00                     0x57   0x9447      985 L1 L2
+Leaf4.02-00                     0x53   0xe758      872 L1 L2
+Leaf4.03-00                     0x52   0x141c      672 L1 L2
+BorderLeaf1.00-00               0x56   0x1051      481 L1 L2
+BorderLeaf2.00-00               0x56   0xc598     1168 L1 L2
+BorderLeaf2.02-00               0x53   0x1b11      688 L1 L2
+Spine2.00-00                    0x5d   0xd6a2     1124 L1 L2
+Spine2.02-00                    0x54   0xe540      585 L1 L2
+Spine2.03-00                    0x53    0x91b      755 L1 L2
+Spine2.04-00                    0x53   0x2af6      851 L1 L2
+  20 LSPs
+  ```
+Вывод ping и traceroute от Leaf1 - BorderLeaf2  
+```text
+root@Leaf1> ping 10.0.1.6 
+PING 10.0.1.6 (10.0.1.6): 56 data bytes
+64 bytes from 10.0.1.6: icmp_seq=0 ttl=63 time=263.625 ms
+64 bytes from 10.0.1.6: icmp_seq=1 ttl=63 time=128.886 ms
+64 bytes from 10.0.1.6: icmp_seq=2 ttl=63 time=138.006 ms
+64 bytes from 10.0.1.6: icmp_seq=3 ttl=63 time=178.101 ms
+^C
+--- 10.0.1.6 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 128.886/177.154/263.625/53.246 ms
+
+{master:0}
+root@Leaf1> traceroute 10.0.1.6 
+traceroute to 10.0.1.6 (10.0.1.6), 30 hops max, 40 byte packets
+ 1  10.2.2.0 (10.2.2.0)  183.560 ms  364.774 ms  303.265 ms
+ 2  * * *
+ 3  10.0.1.6 (10.0.1.6)  189.421 ms  400.694 ms  305.938 ms
+```
