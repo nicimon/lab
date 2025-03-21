@@ -732,6 +732,374 @@ traceroute to 10.0.1.6 (10.0.1.6), 30 hops max, 40 byte packets
 ---
 Конфигурация оборудования
 
+Вывод display set
+<details>
+<summary>Spine1</summary>
+
+``` text
+root@Spine1> show configuration | display set 
+set version 20.3R1.8
+set system host-name Spine1
+set system root-authentication encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"
+set system root-authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system login user vagrant uid 2000
+set system login user vagrant class super-user
+set system login user vagrant authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system services ssh root-login allow
+set system services netconf ssh
+set system services rest http port 8080
+set system services rest enable-explorer
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system extensions providers juniper license-type juniper deployment-scope commercial
+set system extensions providers chef license-type juniper deployment-scope commercial
+set interfaces xe-0/0/1 unit 0 description "--- Spine1 - Leaf1 ---"
+set interfaces xe-0/0/1 unit 0 family inet address 10.2.1.0/31
+set interfaces xe-0/0/1 unit 0 family iso
+set interfaces xe-0/0/2 unit 0 description "--- Spine1 - Leaf2 ---"
+set interfaces xe-0/0/2 unit 0 family inet address 10.2.1.2/31
+set interfaces xe-0/0/2 unit 0 family iso
+set interfaces xe-0/0/3 unit 0 description "--- Spine1 - Leaf3 ---"
+set interfaces xe-0/0/3 unit 0 family inet address 10.2.1.4/31
+set interfaces xe-0/0/3 unit 0 family iso
+set interfaces xe-0/0/4 unit 0 description "--- Spine1 - Leaf4 ---"
+set interfaces xe-0/0/4 unit 0 family inet address 10.2.1.6/31
+set interfaces xe-0/0/4 unit 0 family iso
+set interfaces xe-0/0/5 unit 0 description "--- Spine1 - BorderLeaf1 ---"
+set interfaces xe-0/0/5 unit 0 family inet address 10.2.1.8/31
+set interfaces xe-0/0/5 unit 0 family iso
+set interfaces xe-0/0/6 unit 0 description "--- Spine1 - BorderLeaf2 ---"
+set interfaces xe-0/0/6 unit 0 family inet address 10.2.1.10/31
+set interfaces xe-0/0/6 unit 0 family iso
+set interfaces em0 unit 0 family inet dhcp
+set interfaces em1 unit 0 family inet address 169.254.0.2/24
+set interfaces lo0 unit 0 family inet address 10.0.1.0/32
+set interfaces lo0 unit 0 family iso address 49.0078.0100.0000.1000.00
+set forwarding-options storm-control-profiles default all
+set routing-options router-id 10.0.1.0
+set protocols isis interface xe-0/0/1.0 level 1 disable
+set protocols isis interface xe-0/0/2.0 level 1 disable
+set protocols isis interface xe-0/0/3.0 level 1 disable
+set protocols isis interface xe-0/0/4.0 level 1 disable
+set protocols isis interface xe-0/0/5.0 level 1 disable
+set protocols isis interface xe-0/0/6.0 level 1 disable
+set protocols isis interface lo0.0 level 1 disable
+set protocols isis level 2 wide-metrics-only
+set protocols igmp-snooping vlan default
+set vlans default vlan-id 1
+```
+</details>
+<details>
+<summary>Spine2</summary>
+
+``` text
+root@Spine2# show | display set 
+set version 20.3R1.8
+set system host-name Spine2
+set system root-authentication encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"
+set system root-authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system login user vagrant uid 2000
+set system login user vagrant class super-user
+set system login user vagrant authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system services ssh root-login allow
+set system services netconf ssh
+set system services rest http port 8080
+set system services rest enable-explorer
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system extensions providers juniper license-type juniper deployment-scope commercial
+set system extensions providers chef license-type juniper deployment-scope commercial
+set interfaces xe-0/0/1 unit 0 description "--- Spine2 - Leaf1 ---"
+set interfaces xe-0/0/1 unit 0 family inet address 10.2.2.0/31
+set interfaces xe-0/0/1 unit 0 family iso
+set interfaces xe-0/0/2 unit 0 description "--- Spine2 - Leaf2 ---"
+set interfaces xe-0/0/2 unit 0 family inet address 10.2.2.2/31
+set interfaces xe-0/0/2 unit 0 family iso
+set interfaces xe-0/0/3 unit 0 description "--- Spine2 - Leaf3 ---"
+set interfaces xe-0/0/3 unit 0 family inet address 10.2.2.4/31
+set interfaces xe-0/0/3 unit 0 family iso
+set interfaces xe-0/0/4 unit 0 description "--- Spine2 - Leaf4 ---"
+set interfaces xe-0/0/4 unit 0 family inet address 10.2.2.6/31
+set interfaces xe-0/0/4 unit 0 family iso
+set interfaces xe-0/0/5 unit 0 description "--- Spine2 - BorderLeaf1 ---"
+set interfaces xe-0/0/5 unit 0 family inet address 10.2.2.8/31
+set interfaces xe-0/0/5 unit 0 family iso
+set interfaces xe-0/0/6 unit 0 description "--- Spine2 - BorderLeaf2 ---"
+set interfaces xe-0/0/6 unit 0 family inet address 10.2.2.10/31
+set interfaces xe-0/0/6 unit 0 family iso
+set interfaces em0 unit 0 family inet dhcp
+set interfaces em1 unit 0 family inet address 169.254.0.2/24
+set interfaces lo0 unit 0 family inet address 10.0.2.0/32
+set interfaces lo0 unit 0 family iso address 49.0078.0100.0000.2000.00
+set forwarding-options storm-control-profiles default all
+set routing-options router-id 10.0.2.0
+set protocols isis interface xe-0/0/1.0 level 1 disable
+set protocols isis interface xe-0/0/2.0 level 1 disable
+set protocols isis interface xe-0/0/3.0 level 1 disable
+set protocols isis interface xe-0/0/4.0 level 1 disable
+set protocols isis interface xe-0/0/5.0 level 1 disable
+set protocols isis interface xe-0/0/6.0 level 1 disable
+set protocols isis interface lo0.0 level 1 disable
+set protocols isis level 2 wide-metrics-only
+set protocols igmp-snooping vlan default
+set vlans default vlan-id 1
+```
+</details>
+<details>
+<summary>Leaf1</summary>
+
+``` text
+root@Leaf1> show configuration | display set 
+set version 20.3R1.8
+set system host-name Leaf1
+set system root-authentication encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"
+set system root-authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system login user vagrant uid 2000
+set system login user vagrant class super-user
+set system login user vagrant authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system services ssh root-login allow
+set system services netconf ssh
+set system services rest http port 8080
+set system services rest enable-explorer
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system extensions providers juniper license-type juniper deployment-scope commercial
+set system extensions providers chef license-type juniper deployment-scope commercial
+set interfaces xe-0/0/1 unit 0 description "--- Leaf1 - Spine1  ---"
+set interfaces xe-0/0/1 unit 0 family inet address 10.2.1.1/31
+set interfaces xe-0/0/1 unit 0 family iso
+set interfaces xe-0/0/2 unit 0 description "--- Leaf1 - Spine2  ---"
+set interfaces xe-0/0/2 unit 0 family inet address 10.2.2.1/31
+set interfaces xe-0/0/2 unit 0 family iso
+set interfaces em0 unit 0 family inet dhcp
+set interfaces em1 unit 0 family inet address 169.254.0.2/24
+set interfaces lo0 unit 0 family inet address 10.0.1.1/32
+set interfaces lo0 unit 0 family iso address 49.0078.0100.0000.1001.00
+set forwarding-options storm-control-profiles default all
+set routing-options router-id 10.0.1.1
+set protocols isis interface xe-0/0/1.0 level 1 disable
+set protocols isis interface xe-0/0/2.0 level 1 disable
+set protocols isis interface lo0.0 level 1 disable
+set protocols isis level 2 wide-metrics-only
+set protocols igmp-snooping vlan default
+set vlans default vlan-id 1
+```
+</details>
+<details>
+<summary>Leaf2</summary>
+
+``` text
+root@Leaf2> show configuration | display set 
+set version 20.3R1.8
+set system host-name Leaf2
+set system root-authentication encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"
+set system root-authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system login user vagrant uid 2000
+set system login user vagrant class super-user
+set system login user vagrant authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system services ssh root-login allow
+set system services netconf ssh
+set system services rest http port 8080
+set system services rest enable-explorer
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system extensions providers juniper license-type juniper deployment-scope commercial
+set system extensions providers chef license-type juniper deployment-scope commercial
+set interfaces xe-0/0/1 unit 0 description "--- Leaf2 - Spine1  ---"
+set interfaces xe-0/0/1 unit 0 family inet address 10.2.1.3/31
+set interfaces xe-0/0/1 unit 0 family iso
+set interfaces xe-0/0/2 unit 0 description "--- Leaf2 - Spine2  ---"
+set interfaces xe-0/0/2 unit 0 family inet address 10.2.2.3/31
+set interfaces xe-0/0/2 unit 0 family iso
+set interfaces em0 unit 0 family inet dhcp
+set interfaces em1 unit 0 family inet address 169.254.0.2/24
+set interfaces lo0 unit 0 family inet address 10.0.1.2/32
+set interfaces lo0 unit 0 family iso address 49.0078.0100.0000.1002.00
+set forwarding-options storm-control-profiles default all
+set routing-options router-id 10.0.1.2
+set protocols isis interface xe-0/0/1.0 level 1 disable
+set protocols isis interface xe-0/0/2.0 level 1 disable
+set protocols isis interface lo0.0 level 1 disable
+set protocols isis level 2 wide-metrics-only
+set protocols igmp-snooping vlan default
+set vlans default vlan-id 1
+```
+</details>
+<details>
+<summary>Leaf3</summary>
+
+``` text
+root@Leaf3> show configuration | display set 
+set version 20.3R1.8
+set system host-name Leaf3
+set system root-authentication encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"
+set system root-authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system login user vagrant uid 2000
+set system login user vagrant class super-user
+set system login user vagrant authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system services ssh root-login allow
+set system services netconf ssh
+set system services rest http port 8080
+set system services rest enable-explorer
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system extensions providers juniper license-type juniper deployment-scope commercial
+set system extensions providers chef license-type juniper deployment-scope commercial
+set interfaces xe-0/0/1 unit 0 description "--- Leaf3 - Spine1  ---"
+set interfaces xe-0/0/1 unit 0 family inet address 10.2.1.5/31
+set interfaces xe-0/0/1 unit 0 family iso
+set interfaces xe-0/0/2 unit 0 description "--- Leaf3 - Spine2  ---"
+set interfaces xe-0/0/2 unit 0 family inet address 10.2.2.5/31
+set interfaces xe-0/0/2 unit 0 family iso
+set interfaces em0 unit 0 family inet dhcp
+set interfaces em1 unit 0 family inet address 169.254.0.2/24
+set interfaces lo0 unit 0 family inet address 10.0.1.3/32
+set interfaces lo0 unit 0 family iso address 49.0078.0100.0000.1003.00
+set forwarding-options storm-control-profiles default all
+set routing-options router-id 10.0.1.3
+set protocols isis interface xe-0/0/1.0 level 1 disable
+set protocols isis interface xe-0/0/2.0 level 1 disable
+set protocols isis interface lo0.0 level 1 disable
+set protocols isis level 2 wide-metrics-only
+set protocols igmp-snooping vlan default
+set vlans default vlan-id 1
+```
+</details>
+<details>
+<summary>Leaf4</summary>
+
+``` text
+root@Leaf4> show configuration | display set 
+set version 20.3R1.8
+set system host-name Leaf4
+set system root-authentication encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"
+set system root-authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system login user vagrant uid 2000
+set system login user vagrant class super-user
+set system login user vagrant authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system services ssh root-login allow
+set system services netconf ssh
+set system services rest http port 8080
+set system services rest enable-explorer
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system extensions providers juniper license-type juniper deployment-scope commercial
+set system extensions providers chef license-type juniper deployment-scope commercial
+set interfaces xe-0/0/1 unit 0 description "--- Leaf4 - Spine1  ---"
+set interfaces xe-0/0/1 unit 0 family inet address 10.2.1.7/31
+set interfaces xe-0/0/1 unit 0 family iso
+set interfaces xe-0/0/2 unit 0 description "--- Leaf4 - Spine2  ---"
+set interfaces xe-0/0/2 unit 0 family inet address 10.2.2.7/31
+set interfaces xe-0/0/2 unit 0 family iso
+set interfaces em0 unit 0 family inet dhcp
+set interfaces em1 unit 0 family inet address 169.254.0.2/24
+set interfaces lo0 unit 0 family inet address 10.0.1.4/32
+set interfaces lo0 unit 0 family iso address 49.0078.0100.0000.1004.00
+set forwarding-options storm-control-profiles default all
+set routing-options router-id 10.0.1.4
+set protocols isis interface xe-0/0/1.0 level 1 disable
+set protocols isis interface xe-0/0/2.0 level 1 disable
+set protocols isis interface lo0.0 level 1 disable
+set protocols isis level 2 wide-metrics-only
+set protocols igmp-snooping vlan default
+set vlans default vlan-id 1
+```
+</details>
+<details>
+<summary>BorderLeaf1</summary>
+
+``` text
+root@BorderLeaf1> show configuration | display set 
+set version 20.3R1.8
+set system host-name BorderLeaf1
+set system root-authentication encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"
+set system root-authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system login user vagrant uid 2000
+set system login user vagrant class super-user
+set system login user vagrant authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system services ssh root-login allow
+set system services netconf ssh
+set system services rest http port 8080
+set system services rest enable-explorer
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system extensions providers juniper license-type juniper deployment-scope commercial
+set system extensions providers chef license-type juniper deployment-scope commercial
+set interfaces xe-0/0/1 unit 0 description "--- BorderLeaf1 - Spine1  ---"
+set interfaces xe-0/0/1 unit 0 family inet address 10.2.1.9/31
+set interfaces xe-0/0/1 unit 0 family iso
+set interfaces xe-0/0/2 unit 0 description "--- BorderLeaf1 - Spine2  ---"
+set interfaces xe-0/0/2 unit 0 family inet address 10.2.2.9/31
+set interfaces xe-0/0/2 unit 0 family iso
+set interfaces em0 unit 0 family inet dhcp
+set interfaces em1 unit 0 family inet address 169.254.0.2/24
+set interfaces lo0 unit 0 family inet address 10.0.1.5/32
+set interfaces lo0 unit 0 family iso address 49.0078.0100.0000.1005.00
+set forwarding-options storm-control-profiles default all
+set routing-options router-id 10.0.1.5
+set protocols isis interface xe-0/0/1.0 level 1 disable
+set protocols isis interface xe-0/0/2.0 level 1 disable
+set protocols isis interface lo0.0 level 1 disable
+set protocols isis level 2 wide-metrics-only
+set protocols igmp-snooping vlan default
+set vlans default vlan-id 1
+```
+</details>
+<details>
+<summary>BorderLeaf2</summary>
+
+``` text
+root@BorderLeaf2# show | display set 
+set version 20.3R1.8
+set system host-name BorderLeaf2
+set system root-authentication encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"
+set system root-authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system login user vagrant uid 2000
+set system login user vagrant class super-user
+set system login user vagrant authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system services ssh root-login allow
+set system services netconf ssh
+set system services rest http port 8080
+set system services rest enable-explorer
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system extensions providers juniper license-type juniper deployment-scope commercial
+set system extensions providers chef license-type juniper deployment-scope commercial
+set interfaces xe-0/0/1 unit 0 family inet address 10.2.1.11/31
+set interfaces xe-0/0/1 unit 0 family iso
+set interfaces xe-0/0/2 unit 0 family inet address 10.2.2.11/31
+set interfaces xe-0/0/2 unit 0 family iso
+set interfaces em0 unit 0 family inet dhcp
+set interfaces em1 unit 0 family inet address 169.254.0.2/24
+set interfaces lo0 unit 0 family inet address 10.0.1.6/32
+set interfaces lo0 unit 0 family iso address 49.0078.0100.0000.1006.00
+set forwarding-options storm-control-profiles default all
+set routing-options router-id 10.0.1.6
+set protocols isis interface xe-0/0/1.0 level 1 disable
+set protocols isis interface xe-0/0/2.0 level 1 disable
+set protocols isis interface lo0.0 level 1 disable
+set protocols isis level 2 wide-metrics-only
+set protocols igmp-snooping vlan default
+set vlans default vlan-id 1
+```
+</details>
+Конфигурация без display set
 <details>
 <summary>Spine1</summary>
 
