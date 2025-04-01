@@ -172,4 +172,21 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
   inet.0: 1/1/1/0
 10.2.2.11        4200000016        421        421       0       1     3:09:11 Establ
   inet.0: 1/1/1/0
-   ```
+```
+ ```text
+root@Leaf1> ping 10.0.1.6 count 3
+PING 10.0.1.6 (10.0.1.6): 56 data bytes
+64 bytes from 10.0.1.6: icmp_seq=0 ttl=63 time=120.962 ms
+64 bytes from 10.0.1.6: icmp_seq=1 ttl=63 time=126.532 ms
+64 bytes from 10.0.1.6: icmp_seq=2 ttl=63 time=207.981 ms
+
+--- 10.0.1.6 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 120.962/151.825/207.981/39.773 ms
+```
+ ```text
+root@Leaf1> traceroute 10.0.1.6 
+traceroute to 10.0.1.6 (10.0.1.6), 30 hops max, 40 byte packets
+ 1  10.2.1.0 (10.2.1.0)  124.781 ms *  113.512 ms
+ 2  10.0.1.6 (10.0.1.6)  310.235 ms  206.774 ms  213.640 ms
+```
