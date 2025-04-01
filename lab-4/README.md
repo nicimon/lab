@@ -22,6 +22,7 @@
 ---
 Настройка eBGP
 Spine1
+```text
 root@Spine1> show configuration protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
 set protocols bgp group UNDERLAY export allow-loopback
@@ -39,8 +40,9 @@ set protocols bgp group UNDERLAY neighbor 10.2.1.9 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.1.9 peer-as 4200000015
 set protocols bgp group UNDERLAY neighbor 10.2.1.11 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.1.11 peer-as 4200000016
-
+```
 Spine2
+```text
 root@Spine2> show configuration protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
 set protocols bgp group UNDERLAY export allow-loopback
@@ -58,8 +60,9 @@ set protocols bgp group UNDERLAY neighbor 10.2.2.9 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.2.9 peer-as 4200000015
 set protocols bgp group UNDERLAY neighbor 10.2.2.11 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.2.11 peer-as 4200000016
-
+```
 Leaf1
+```text
 root@Leaf1> show configuration protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
 set protocols bgp group UNDERLAY export allow-loopback
@@ -68,8 +71,9 @@ set protocols bgp group UNDERLAY local-as 4200000011
 set protocols bgp group UNDERLAY multipath
 set protocols bgp group UNDERLAY neighbor 10.2.1.0 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.2.0 family inet unicast
-
+```
 Leaf2
+```text
 root@Leaf2> show configuration protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
 set protocols bgp group UNDERLAY export allow-loopback
@@ -78,8 +82,9 @@ set protocols bgp group UNDERLAY local-as 4200000012
 set protocols bgp group UNDERLAY multipath
 set protocols bgp group UNDERLAY neighbor 10.2.1.2 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.2.2 family inet unicast
-
+```
 leaf3
+```text
 root@Leaf3> show configuration protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
 set protocols bgp group UNDERLAY export allow-loopback
@@ -88,8 +93,9 @@ set protocols bgp group UNDERLAY local-as 4200000013
 set protocols bgp group UNDERLAY multipath
 set protocols bgp group UNDERLAY neighbor 10.2.1.4 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.2.4 family inet unicast
-
+```
 leaf4
+```text
 root@Leaf4> show configuration protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
 set protocols bgp group UNDERLAY export allow-loopback
@@ -98,8 +104,9 @@ set protocols bgp group UNDERLAY local-as 4200000014
 set protocols bgp group UNDERLAY multipath
 set protocols bgp group UNDERLAY neighbor 10.2.1.6 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.2.6 family inet unicast
-
+```
 BorderLeaf1
+```text
 root@BorderLeaf1> show configuration protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
 set protocols bgp group UNDERLAY export allow-loopback
@@ -108,8 +115,9 @@ set protocols bgp group UNDERLAY local-as 4200000015
 set protocols bgp group UNDERLAY multipath
 set protocols bgp group UNDERLAY neighbor 10.2.1.8 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.2.8 family inet unicast
-
+```
 BorderLeaf2
+```text
 root@BorderLeaf2> show configuration protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
 set protocols bgp group UNDERLAY export allow-loopback
@@ -118,3 +126,4 @@ set protocols bgp group UNDERLAY local-as 4200000016
 set protocols bgp group UNDERLAY multipath
 set protocols bgp group UNDERLAY neighbor 10.2.1.10 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.2.10 family inet unicast
+```
