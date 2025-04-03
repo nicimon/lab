@@ -579,7 +579,9 @@ set protocols igmp-snooping vlan default
 set vlans default vlan-id 1
 ```
 </details>
-Leaf3
+<details>
+<summary>Leaf3</summary>
+```text
 root@Leaf3> show configuration | display set 
 set version 20.3R1.8
 set system host-name Leaf3
@@ -624,8 +626,11 @@ set protocols bgp group UNDERLAY neighbor 10.2.1.4
 set protocols bgp group UNDERLAY neighbor 10.2.2.4
 set protocols igmp-snooping vlan default
 set vlans default vlan-id 1
-
-Leaf4
+```
+</details>
+<details>
+<summary>Leaf4</summary>
+```text
 root@Leaf4> show configuration | display set 
 set version 20.3R1.8
 set system host-name Leaf4
@@ -670,8 +675,11 @@ set protocols bgp group UNDERLAY neighbor 10.2.1.6
 set protocols bgp group UNDERLAY neighbor 10.2.2.6
 set protocols igmp-snooping vlan default
 set vlans default vlan-id 1
-
-BorderLeaf1
+```
+</details>
+<details>
+<summary>BorderLeaf1</summary>
+```text
 root@BorderLeaf1> show configuration | display set 
 set version 20.3R1.8
 set system host-name BorderLeaf1
@@ -716,8 +724,11 @@ set protocols bgp group UNDERLAY neighbor 10.2.1.8
 set protocols bgp group UNDERLAY neighbor 10.2.2.8
 set protocols igmp-snooping vlan default
 set vlans default vlan-id 1
-
-BorderLeaf2
+```
+</details>
+<details>
+<summary>BorderLeaf2</summary>
+```text
 root@BorderLeaf2> show configuration | display set 
 set version 20.3R1.8
 set system host-name BorderLeaf2
@@ -759,4 +770,6 @@ set protocols bgp group UNDERLAY neighbor 10.2.1.10
 set protocols bgp group UNDERLAY neighbor 10.2.2.10
 set protocols igmp-snooping vlan default
 set vlans default vlan-id 1
+```
+</details>
 ---
