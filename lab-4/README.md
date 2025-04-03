@@ -363,6 +363,7 @@ traceroute to 10.0.1.6 (10.0.1.6) from 10.0.1.1, 30 hops max, 40 byte packets
 **Конфигурация оборудования**
 <details>
 <summary>Spine1</summary>
+
 ```text
 root@Spine1> show configuration | display set 
 set version 20.3R1.8
@@ -423,6 +424,7 @@ set vlans default vlan-id 1
 </details>
 <details>
 <summary>Spine2</summary>
+
 ```text
 root@Spine2> show configuration | display set 
 set version 20.3R1.8
@@ -483,6 +485,7 @@ set vlans default vlan-id 1
 </details>
 <details>
 <summary>Leaf1</summary>
+
 ```text
 root@Leaf1> show configuration | display set 
 set version 20.3R1.8
@@ -532,6 +535,7 @@ set vlans default vlan-id 1
 </details>
 <details>
 <summary>Leaf2</summary>
+
 ```text
 root@Leaf2> show configuration | display set 
 set version 20.3R1.8
@@ -581,6 +585,7 @@ set vlans default vlan-id 1
 </details>
 <details>
 <summary>Leaf3</summary>
+
 ```text
 root@Leaf3> show configuration | display set 
 set version 20.3R1.8
@@ -630,6 +635,7 @@ set vlans default vlan-id 1
 </details>
 <details>
 <summary>Leaf4</summary>
+
 ```text
 root@Leaf4> show configuration | display set 
 set version 20.3R1.8
@@ -679,6 +685,7 @@ set vlans default vlan-id 1
 </details>
 <details>
 <summary>BorderLeaf1</summary>
+
 ```text
 root@BorderLeaf1> show configuration | display set 
 set version 20.3R1.8
@@ -728,6 +735,7 @@ set vlans default vlan-id 1
 </details>
 <details>
 <summary>BorderLeaf2</summary>
+
 ```text
 root@BorderLeaf2> show configuration | display set 
 set version 20.3R1.8
