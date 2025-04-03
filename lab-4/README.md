@@ -20,7 +20,7 @@
 | BorderLeaf1 | 10.0.1.5 | 4200000015 |
 | BorderLeaf2 | 10.0.1.6 | 4200000016 |
 ---
-Настройка eBGP
+Настройка eBGP на Spine и Leaf
 
 Spine1
 ```text
@@ -155,6 +155,16 @@ root@BorderLeaf2# show routing-options | display set
 set routing-options forwarding-table export PFE-ECMP
 set routing-options router-id 10.0.1.6
 set routing-options autonomous-system 4200000016
+```
+Настройка политики балансировки ECMP и политики экспорта Lo0 адресов в BGP  
+```text
+show policy-options policy-statement PFE-ECMP | display set 
+set policy-options policy-statement PFE-ECMP then load-balance per-packet
+
+show policy-options policy-statement BGP_LOOPBACK0 | display s...
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 from protocol direct
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 from route-filter 10.0.1.0/32 exact
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 then accept
 ```
 ---
 Проверка
