@@ -177,17 +177,17 @@ Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
 inet.0               
                        6          6          0          0          0          0
 Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
-10.2.1.1         4200000011        416        416       0       2     3:07:03 Establ
+10.2.1.1         4200000011       2186       2160       0       0    16:24:26 Establ
   inet.0: 1/1/1/0
-10.2.1.3         4200000012        415        417       0       2     3:07:07 Establ
+10.2.1.3         4200000012       2182       2158       0       0    16:24:21 Establ
   inet.0: 1/1/1/0
-10.2.1.5         4200000013        416        417       0       3     3:07:07 Establ
+10.2.1.5         4200000013       2184       2159       0       0    16:24:26 Establ
   inet.0: 1/1/1/0
-10.2.1.7         4200000014        417        417       0       2     3:07:07 Establ
+10.2.1.7         4200000014       2183       2159       0       0    16:24:26 Establ
   inet.0: 1/1/1/0
-10.2.1.9         4200000015        416        416       0       1     3:07:03 Establ
+10.2.1.9         4200000015       2183       2158       0       0    16:24:26 Establ
   inet.0: 1/1/1/0
-10.2.1.11        4200000016        416        416       0       1     3:07:03 Establ
+10.2.1.11        4200000016       2186       2159       0       0    16:24:25 Establ
   inet.0: 1/1/1/0
   ```
   ```text
@@ -199,19 +199,104 @@ Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
 inet.0               
                        6          6          0          0          0          0
 Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
-10.2.2.1         4200000011        421        422       0       2     3:09:10 Establ
+10.2.2.1         4200000011       2206       2177       0       3    16:33:28 Establ
   inet.0: 1/1/1/0
-10.2.2.3         4200000012        420        421       0       2     3:09:11 Establ
+10.2.2.3         4200000012       2202       2177       0       3    16:33:28 Establ
   inet.0: 1/1/1/0
-10.2.2.5         4200000013        420        421       0       2     3:09:07 Establ
+10.2.2.5         4200000013       2203       2176       0       3    16:33:28 Establ
   inet.0: 1/1/1/0
-10.2.2.7         4200000014        420        420       0       2     3:09:06 Establ
+10.2.2.7         4200000014       2203       2176       0       3    16:33:28 Establ
   inet.0: 1/1/1/0
-10.2.2.9         4200000015        421        422       0       1     3:09:11 Establ
+10.2.2.9         4200000015       2203       2177       0       3    16:33:28 Establ
   inet.0: 1/1/1/0
-10.2.2.11        4200000016        421        421       0       1     3:09:11 Establ
+10.2.2.11        4200000016       2207       2177       0       3    16:33:28 Establ
   inet.0: 1/1/1/0
 ```
+ ```text
+ root@Leaf1> show bgp summary 
+Threading mode: BGP I/O
+Default eBGP mode: advertise - accept, receive - accept
+Groups: 1 Peers: 2 Down peers: 0
+Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+inet.0               
+                      12         12          0          0          0          0
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+10.2.1.0         4200000001       2166       2190       0       4    16:27:00 Establ
+  inet.0: 6/6/6/0
+10.2.2.0         4200000001       2181       2208       0       3    16:35:00 Establ
+  inet.0: 6/6/6/0
+ ```
+ ```text
+ root@Leaf2> show bgp summary 
+Threading mode: BGP I/O
+Default eBGP mode: advertise - accept, receive - accept
+Groups: 1 Peers: 2 Down peers: 0
+Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+inet.0               
+                      12         12          0          0          0          0
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+10.2.1.2         4200000001       2166       2188       0       3    16:26:54 Establ
+  inet.0: 6/6/6/0
+10.2.2.2         4200000001       2182       2205       0       2    16:34:59 Establ
+  inet.0: 6/6/6/0
+ ```
+ ```text
+ root@Leaf3> show bgp summary 
+Threading mode: BGP I/O
+Default eBGP mode: advertise - accept, receive - accept
+Groups: 1 Peers: 2 Down peers: 0
+Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+inet.0               
+                      12         12          0          0          0          0
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+10.2.1.4         4200000001       2165       2187       0       2    16:27:00 Establ
+  inet.0: 6/6/6/0
+10.2.2.4         4200000001       2180       2205       0       1    16:35:00 Establ
+  inet.0: 6/6/6/0
+ ```
+ ```text
+ root@Leaf4> show bgp summary 
+Threading mode: BGP I/O
+Default eBGP mode: advertise - accept, receive - accept
+Groups: 1 Peers: 2 Down peers: 0
+Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+inet.0               
+                      12         12          0          0          0          0
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+10.2.1.6         4200000001       2166       2188       0       2    16:27:00 Establ
+  inet.0: 6/6/6/0
+10.2.2.6         4200000001       2180       2205       0       1    16:35:00 Establ
+  inet.0: 6/6/6/0
+  ```
+  ```text
+  root@BorderLeaf1> show bgp summary 
+Threading mode: BGP I/O
+Default eBGP mode: advertise - accept, receive - accept
+Groups: 1 Peers: 2 Down peers: 0
+Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+inet.0               
+                      12         12          0          0          0          0
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+10.2.1.8         4200000001       2165       2188       0       2    16:26:59 Establ
+  inet.0: 6/6/6/0
+10.2.2.8         4200000001       2181       2205       0       1    16:34:59 Establ
+  inet.0: 6/6/6/0
+   ```
+```text
+root@BorderLeaf2> show bgp summary 
+Threading mode: BGP I/O
+Default eBGP mode: advertise - accept, receive - accept
+Groups: 1 Peers: 2 Down peers: 0
+Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+inet.0               
+                      12         12          0          0          0          0
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+10.2.1.10        4200000001       2165       2190       0       2    16:26:58 Establ
+  inet.0: 6/6/6/0
+10.2.2.10        4200000001       2181       2209       0       1    16:35:00 Establ
+  inet.0: 6/6/6/0
+```
+
 Проверка связанности 
  ```text
 root@Leaf1> ping 10.0.1.6 count 3
