@@ -297,7 +297,7 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
   inet.0: 6/6/6/0
 ```
 
-Проверка связанности между leaf1 <-> BorderLeaf2
+**Проверка связанности между leaf1 <-> BorderLeaf2
 ```text
 root@Leaf1> show route table inet.0 10.0.1.6/32 
 
@@ -341,7 +341,7 @@ traceroute to 10.0.1.6 (10.0.1.6) from 10.0.1.1, 30 hops max, 40 byte packets
  2  10.0.1.6 (10.0.1.6)  219.353 ms  209.587 ms  214.161 ms
 ```
 ```text
-Ping и traceroute с выключенным Spine1
+**Ping и traceroute с выключенным Spine1
 root@Leaf1> ping 10.0.1.6 source 10.0.1.1    
 PING 10.0.1.6 (10.0.1.6): 56 data bytes
 64 bytes from 10.0.1.6: icmp_seq=0 ttl=63 time=126.627 ms
