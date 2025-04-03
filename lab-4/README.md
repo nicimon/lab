@@ -167,7 +167,7 @@ set policy-options policy-statement BGP_LOOPBACK0 term TERM1 from route-filter 1
 set policy-options policy-statement BGP_LOOPBACK0 term TERM1 then accept
 ```
 ---
-Проверка
+**Проверка**
 ```text
 root@Spine1> show bgp summary 
 Threading mode: BGP I/O
