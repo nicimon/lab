@@ -21,111 +21,140 @@
 | BorderLeaf2 | 10.0.1.6 | 4200000016 |
 ---
 Настройка eBGP
+
 Spine1
 ```text
-root@Spine1> show configuration protocols bgp | display set 
+root@Spine1# show protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
-set protocols bgp group UNDERLAY export allow-loopback
-set protocols bgp group UNDERLAY local-as 4200000001
+set protocols bgp group UNDERLAY family inet unicast
+set protocols bgp group UNDERLAY export BGP_LOOPBACK0
 set protocols bgp group UNDERLAY multipath
-set protocols bgp group UNDERLAY neighbor 10.2.1.1 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.1.1 peer-as 4200000011
-set protocols bgp group UNDERLAY neighbor 10.2.1.3 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.1.3 peer-as 4200000012
-set protocols bgp group UNDERLAY neighbor 10.2.1.5 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.1.5 peer-as 4200000013
-set protocols bgp group UNDERLAY neighbor 10.2.1.7 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.1.7 peer-as 4200000014
-set protocols bgp group UNDERLAY neighbor 10.2.1.9 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.1.9 peer-as 4200000015
-set protocols bgp group UNDERLAY neighbor 10.2.1.11 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.1.11 peer-as 4200000016
+
+root@Spine1# show routing-options | display set 
+set routing-options forwarding-table export PFE-ECMP
+set routing-options router-id 10.0.1.0
+set routing-options autonomous-system 4200000001
 ```
 Spine2
 ```text
-root@Spine2> show configuration protocols bgp | display set 
+root@Spine2# show protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
-set protocols bgp group UNDERLAY export allow-loopback
-set protocols bgp group UNDERLAY local-as 4200000001
+set protocols bgp group UNDERLAY family inet unicast
+set protocols bgp group UNDERLAY export BGP_LOOPBACK0
 set protocols bgp group UNDERLAY multipath
-set protocols bgp group UNDERLAY neighbor 10.2.2.1 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.2.1 peer-as 4200000011
-set protocols bgp group UNDERLAY neighbor 10.2.2.3 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.2.3 peer-as 4200000012
-set protocols bgp group UNDERLAY neighbor 10.2.2.5 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.2.5 peer-as 4200000013
-set protocols bgp group UNDERLAY neighbor 10.2.2.7 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.2.7 peer-as 4200000014
-set protocols bgp group UNDERLAY neighbor 10.2.2.9 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.2.9 peer-as 4200000015
-set protocols bgp group UNDERLAY neighbor 10.2.2.11 family inet unicast
 set protocols bgp group UNDERLAY neighbor 10.2.2.11 peer-as 4200000016
+
+root@Spine2# show routing-options | display set 
+set routing-options forwarding-table export PFE-ECMP
+set routing-options router-id 10.0.2.0
+set routing-options autonomous-system 4200000001
 ```
 Leaf1
 ```text
-root@Leaf1> show configuration protocols bgp | display set 
+root@Leaf1# show protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
-set protocols bgp group UNDERLAY export allow-loopback
+set protocols bgp group UNDERLAY family inet unicast
+set protocols bgp group UNDERLAY export BGP_LOOPBACK0
 set protocols bgp group UNDERLAY peer-as 4200000001
-set protocols bgp group UNDERLAY local-as 4200000011
 set protocols bgp group UNDERLAY multipath
-set protocols bgp group UNDERLAY neighbor 10.2.1.0 family inet unicast
-set protocols bgp group UNDERLAY neighbor 10.2.2.0 family inet unicast
+set protocols bgp group UNDERLAY neighbor 10.2.1.0
+set protocols bgp group UNDERLAY neighbor 10.2.2.0
+
+root@Leaf1# show routing-options | display set 
+set routing-options forwarding-table export PFE-ECMP
+set routing-options router-id 10.0.1.1
+set routing-options autonomous-system 4200000011
 ```
 Leaf2
 ```text
-root@Leaf2> show configuration protocols bgp | display set 
+root@Leaf2# show protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
-set protocols bgp group UNDERLAY export allow-loopback
+set protocols bgp group UNDERLAY family inet unicast
+set protocols bgp group UNDERLAY export BGP_LOOPBACK0
 set protocols bgp group UNDERLAY peer-as 4200000001
-set protocols bgp group UNDERLAY local-as 4200000012
 set protocols bgp group UNDERLAY multipath
-set protocols bgp group UNDERLAY neighbor 10.2.1.2 family inet unicast
-set protocols bgp group UNDERLAY neighbor 10.2.2.2 family inet unicast
+set protocols bgp group UNDERLAY neighbor 10.2.1.2
+set protocols bgp group UNDERLAY neighbor 10.2.2.2
+
+root@Leaf2# show routing-options | display set 
+set routing-options forwarding-table export PFE-ECMP
+set routing-options router-id 10.0.1.2
+set routing-options autonomous-system 4200000012
+
 ```
 leaf3
 ```text
-root@Leaf3> show configuration protocols bgp | display set 
+root@Leaf3# show protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
-set protocols bgp group UNDERLAY export allow-loopback
+set protocols bgp group UNDERLAY family inet unicast
+set protocols bgp group UNDERLAY export BGP_LOOPBACK0
 set protocols bgp group UNDERLAY peer-as 4200000001
-set protocols bgp group UNDERLAY local-as 4200000013
 set protocols bgp group UNDERLAY multipath
-set protocols bgp group UNDERLAY neighbor 10.2.1.4 family inet unicast
-set protocols bgp group UNDERLAY neighbor 10.2.2.4 family inet unicast
+set protocols bgp group UNDERLAY neighbor 10.2.1.4
+set protocols bgp group UNDERLAY neighbor 10.2.2.4
+
+root@Leaf3# show routing-options | display set 
+set routing-options forwarding-table export PFE-ECMP
+set routing-options router-id 10.0.1.3
+set routing-options autonomous-system 4200000013
 ```
 leaf4
 ```text
-root@Leaf4> show configuration protocols bgp | display set 
+root@Leaf4# show protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
-set protocols bgp group UNDERLAY export allow-loopback
+set protocols bgp group UNDERLAY family inet unicast
+set protocols bgp group UNDERLAY export BGP_LOOPBACK0
 set protocols bgp group UNDERLAY peer-as 4200000001
-set protocols bgp group UNDERLAY local-as 4200000014
-set protocols bgp group UNDERLAY multipath
-set protocols bgp group UNDERLAY neighbor 10.2.1.6 family inet unicast
-set protocols bgp group UNDERLAY neighbor 10.2.2.6 family inet unicast
+set protocols bgp group UNDERLAY multipath multiple-as
+set protocols bgp group UNDERLAY neighbor 10.2.1.6
+set protocols bgp group UNDERLAY neighbor 10.2.2.6
+
+root@Leaf4# show routing-options | display set 
+set routing-options forwarding-table export PFE-ECMP
+set routing-options router-id 10.0.1.4
+set routing-options autonomous-system 4200000014
 ```
 BorderLeaf1
 ```text
-root@BorderLeaf1> show configuration protocols bgp | display set 
+root@BorderLeaf1# show protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
-set protocols bgp group UNDERLAY export allow-loopback
+set protocols bgp group UNDERLAY family inet unicast
+set protocols bgp group UNDERLAY export BGP_LOOPBACK0
 set protocols bgp group UNDERLAY peer-as 4200000001
-set protocols bgp group UNDERLAY local-as 4200000015
-set protocols bgp group UNDERLAY multipath
-set protocols bgp group UNDERLAY neighbor 10.2.1.8 family inet unicast
-set protocols bgp group UNDERLAY neighbor 10.2.2.8 family inet unicast
+set protocols bgp group UNDERLAY multipath multiple-as
+set protocols bgp group UNDERLAY neighbor 10.2.1.8
+set protocols bgp group UNDERLAY neighbor 10.2.2.8
+
+root@BorderLeaf1# show routing-options | display set 
+set routing-options forwarding-table export PFE-ECMP
+set routing-options router-id 10.0.1.5
+set routing-options autonomous-system 4200000015
 ```
 BorderLeaf2
 ```text
-root@BorderLeaf2> show configuration protocols bgp | display set 
+root@BorderLeaf2# show protocols bgp | display set 
 set protocols bgp group UNDERLAY type external
-set protocols bgp group UNDERLAY export allow-loopback
+set protocols bgp group UNDERLAY export BGP_LOOPBACK0
 set protocols bgp group UNDERLAY peer-as 4200000001
-set protocols bgp group UNDERLAY local-as 4200000016
 set protocols bgp group UNDERLAY multipath
-set protocols bgp group UNDERLAY neighbor 10.2.1.10 family inet unicast
-set protocols bgp group UNDERLAY neighbor 10.2.2.10 family inet unicast
+set protocols bgp group UNDERLAY neighbor 10.2.1.10
+set protocols bgp group UNDERLAY neighbor 10.2.2.10
+
+root@BorderLeaf2# show routing-options | display set 
+set routing-options forwarding-table export PFE-ECMP
+set routing-options router-id 10.0.1.6
+set routing-options autonomous-system 4200000016
 ```
 ---
 Проверка
@@ -173,6 +202,7 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
 10.2.2.11        4200000016        421        421       0       1     3:09:11 Establ
   inet.0: 1/1/1/0
 ```
+Проверка связанности 
  ```text
 root@Leaf1> ping 10.0.1.6 count 3
 PING 10.0.1.6 (10.0.1.6): 56 data bytes
