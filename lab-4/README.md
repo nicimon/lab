@@ -297,21 +297,64 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
   inet.0: 6/6/6/0
 ```
 
-Проверка связанности 
- ```text
-root@Leaf1> ping 10.0.1.6 count 3
-PING 10.0.1.6 (10.0.1.6): 56 data bytes
-64 bytes from 10.0.1.6: icmp_seq=0 ttl=63 time=120.962 ms
-64 bytes from 10.0.1.6: icmp_seq=1 ttl=63 time=126.532 ms
-64 bytes from 10.0.1.6: icmp_seq=2 ttl=63 time=207.981 ms
+Проверка связанности между leaf1 <-> BorderLeaf2
+```text
+root@Leaf1> show route table inet.0 10.0.1.6/32 
 
+inet.0: 14 destinations, 19 routes (14 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+10.0.1.6/32        *[BGP/170] 21:02:14, localpref 100
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                       to 10.2.1.0 via xe-0/0/1.0
+                    >  to 10.2.2.0 via xe-0/0/2.0
+                    [BGP/170] 21:02:14, localpref 100
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.0 via xe-0/0/1.0
+root@Leaf1> sh route forwarding-table destination 10.0.1.6/32 table default ..
+Routing table: default.inet
+Internet:
+Destination        Type RtRef Next hop           Type Index    NhRef Netif
+10.0.1.6/32        user     0                    ulst   131070     6
+                              10.2.1.0           ucst     1735     5 xe-0/0/1.0
+                              10.2.2.0           ucst     1734     5 xe-0/0/2.0
+``` 
+ ```text
+root@Leaf1> ping 10.0.1.6 source 10.0.1.1 
+PING 10.0.1.6 (10.0.1.6): 56 data bytes
+64 bytes from 10.0.1.6: icmp_seq=0 ttl=63 time=126.196 ms
+64 bytes from 10.0.1.6: icmp_seq=1 ttl=63 time=121.598 ms
+64 bytes from 10.0.1.6: icmp_seq=2 ttl=63 time=134.900 ms
+64 bytes from 10.0.1.6: icmp_seq=3 ttl=63 time=119.038 ms
+64 bytes from 10.0.1.6: icmp_seq=4 ttl=63 time=120.645 ms
+^C
 --- 10.0.1.6 ping statistics ---
-3 packets transmitted, 3 packets received, 0% packet loss
-round-trip min/avg/max/stddev = 120.962/151.825/207.981/39.773 ms
+5 packets transmitted, 5 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 119.038/124.475/134.900/5.730 ms
 ```
  ```text
-root@Leaf1> traceroute 10.0.1.6 
-traceroute to 10.0.1.6 (10.0.1.6), 30 hops max, 40 byte packets
- 1  10.2.1.0 (10.2.1.0)  124.781 ms *  113.512 ms
- 2  10.0.1.6 (10.0.1.6)  310.235 ms  206.774 ms  213.640 ms
+root@Leaf1> traceroute 10.0.1.6 source 10.0.1.1 
+traceroute to 10.0.1.6 (10.0.1.6) from 10.0.1.1, 30 hops max, 40 byte packets
+ 1  10.2.1.0 (10.2.1.0)  112.562 ms  198.214 ms  205.761 ms
+ 2  10.0.1.6 (10.0.1.6)  219.353 ms  209.587 ms  214.161 ms
+```
+```text
+Ping и traceroute с выключенным Spine1
+root@Leaf1> ping 10.0.1.6 source 10.0.1.1    
+PING 10.0.1.6 (10.0.1.6): 56 data bytes
+64 bytes from 10.0.1.6: icmp_seq=0 ttl=63 time=126.627 ms
+64 bytes from 10.0.1.6: icmp_seq=1 ttl=63 time=132.244 ms
+64 bytes from 10.0.1.6: icmp_seq=2 ttl=63 time=121.266 ms
+64 bytes from 10.0.1.6: icmp_seq=3 ttl=63 time=290.100 ms
+64 bytes from 10.0.1.6: icmp_seq=4 ttl=63 time=122.629 ms
+64 bytes from 10.0.1.6: icmp_seq=5 ttl=63 time=215.378 ms
+^C
+--- 10.0.1.6 ping statistics ---
+6 packets transmitted, 6 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 121.266/168.041/290.100/63.752 ms
+
+root@Leaf1> traceroute 10.0.1.6 source 10.0.1.1    
+traceroute to 10.0.1.6 (10.0.1.6) from 10.0.1.1, 30 hops max, 40 byte packets
+ 1  10.2.2.0 (10.2.2.0)  123.728 ms  204.678 ms  205.348 ms
+ 2  10.0.1.6 (10.0.1.6)  220.287 ms  207.084 ms  211.663 ms
 ```
