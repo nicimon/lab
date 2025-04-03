@@ -311,6 +311,8 @@ inet.0: 14 destinations, 19 routes (14 active, 0 holddown, 0 hidden)
                     [BGP/170] 21:02:14, localpref 100
                       AS path: 4200000001 4200000016 I, validation-state: unverified
                     >  to 10.2.1.0 via xe-0/0/1.0
+```
+```text
 root@Leaf1> sh route forwarding-table destination 10.0.1.6/32 table default ..
 Routing table: default.inet
 Internet:
