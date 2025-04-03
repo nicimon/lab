@@ -780,4 +780,3 @@ set protocols igmp-snooping vlan default
 set vlans default vlan-id 1
 ```
 </details>
----
