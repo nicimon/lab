@@ -91,3 +91,28 @@ Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn St
 10.0.1.6         4200000016        210        206       0       0     1:33:40 Establ
   bgp.evpn.0: 3/3/3/0
 ```
+Настройка RD, RT
+```text
+root@Leaf1# show switch-options | display set 
+set switch-options vtep-source-interface lo0.0
+set switch-options route-distinguisher 10.0.1.1:3
+set switch-options vrf-target target:3:3
+```
+Указание evpn в качестве инкапсуляции
+```text
+root@Leaf1# show protocols evpn | display set 
+set protocols evpn encapsulation vxlan
+set protocols evpn extended-vni-list all
+```
+Добавление vlan
+```text
+root@Leaf1# show vlans v100 | display set 
+set vlans v100 vlan-id 100
+set vlans v100 vxlan vni 10100
+```
+Настройка интерфейса
+```text
+root@Leaf1# show interfaces xe-0/0/3 | display set 
+set interfaces xe-0/0/3 unit 0 family ethernet-switching interface-mode access
+set interfaces xe-0/0/3 unit 0 family ethernet-switching vlan members v100
+```
