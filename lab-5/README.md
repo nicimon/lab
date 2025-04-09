@@ -116,3 +116,52 @@ root@Leaf1# show interfaces xe-0/0/3 | display set
 set interfaces xe-0/0/3 unit 0 family ethernet-switching interface-mode access
 set interfaces xe-0/0/3 unit 0 family ethernet-switching vlan members v100
 ```
+Проверка связанности между серверами, подключенные между Leaf1 и BorderLeaf2
+```text
+root@Docker19:/home# ping 192.168.254.16 -c 5
+PING 192.168.254.16 (192.168.254.16) 56(84) bytes of data.
+64 bytes from 192.168.254.16: icmp_seq=1 ttl=64 time=114 ms
+64 bytes from 192.168.254.16: icmp_seq=2 ttl=64 time=113 ms
+64 bytes from 192.168.254.16: icmp_seq=3 ttl=64 time=113 ms
+64 bytes from 192.168.254.16: icmp_seq=4 ttl=64 time=116 ms
+64 bytes from 192.168.254.16: icmp_seq=5 ttl=64 time=113 ms
+
+--- 192.168.254.16 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4005ms
+rtt min/avg/max/mdev = 113.091/114.037/116.084/1.132 ms
+```
+```text
+root@Docker20:/home# ping 192.168.254.10 -c 5
+PING 192.168.254.10 (192.168.254.10) 56(84) bytes of data.
+64 bytes from 192.168.254.10: icmp_seq=1 ttl=64 time=114 ms
+64 bytes from 192.168.254.10: icmp_seq=2 ttl=64 time=115 ms
+64 bytes from 192.168.254.10: icmp_seq=3 ttl=64 time=114 ms
+64 bytes from 192.168.254.10: icmp_seq=4 ttl=64 time=227 ms
+64 bytes from 192.168.254.10: icmp_seq=5 ttl=64 time=207 ms
+
+--- 192.168.254.10 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 113.550/155.411/226.650/50.571 ms
+```
+Вывод mac address table
+```text
+root@Leaf1> show ethernet-switching table 
+
+MAC flags (S - static MAC, D - dynamic MAC, L - locally learned, P - Persistent static
+           SE - statistics enabled, NM - non configured MAC, R - remote PE MAC, O - ovsdb MAC)
+
+
+Ethernet switching table : 2 entries, 2 learned
+Routing instance : default-switch
+   Vlan                MAC                 MAC      Logical                SVLBNH/      Active
+   name                address             flags    interface              VENH Index   source
+   v100                50:00:00:15:00:01   D        xe-0/0/3.0           
+   v100                50:00:00:16:00:01   D        vtep.32769                          10.0.1.6
+```
+```text
+root@Leaf1> show evpn database                
+Instance: default-switch
+VLAN  DomainId  MAC address        Active source                  Timestamp        IP address
+     10100      50:00:00:15:00:01  xe-0/0/3.0                     Apr 09 10:10:18  192.168.254.10
+     10100      50:00:00:16:00:01  10.0.1.6                       Apr 09 10:07:34  192.168.254.16
+```
