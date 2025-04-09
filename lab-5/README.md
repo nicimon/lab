@@ -165,3 +165,66 @@ VLAN  DomainId  MAC address        Active source                  Timestamp     
      10100      50:00:00:15:00:01  xe-0/0/3.0                     Apr 09 10:10:18  192.168.254.10
      10100      50:00:00:16:00:01  10.0.1.6                       Apr 09 10:07:34  192.168.254.16
 ```
+```text
+root@Leaf1# show | display set 
+set version 20.3R1.8
+set system host-name Leaf1
+set system root-authentication encrypted-password "$6$iOHCqldH$4Bv5iM.SYPDCPExs15aDwLgKfad9fLWfdv53fovFYghTXlJ9rQVFxA9yoIUOf58hSJrXKANdZ.3L2ZWXBPs1T0"
+set system root-authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system login user vagrant uid 2000
+set system login user vagrant class super-user
+set system login user vagrant authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key"
+set system services ssh root-login allow
+set system services netconf ssh
+set system services rest http port 8080
+set system services rest enable-explorer
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system extensions providers juniper license-type juniper deployment-scope commercial
+set system extensions providers chef license-type juniper deployment-scope commercial
+set interfaces xe-0/0/1 unit 0 description "--- Leaf1 - Spine1  ---"
+set interfaces xe-0/0/1 unit 0 family inet address 10.2.1.1/31
+set interfaces xe-0/0/2 unit 0 description "--- Leaf1 - Spine2  ---"
+set interfaces xe-0/0/2 unit 0 family inet address 10.2.2.1/31
+set interfaces xe-0/0/3 unit 0 family ethernet-switching interface-mode access
+set interfaces xe-0/0/3 unit 0 family ethernet-switching vlan members v100
+set interfaces em0 unit 0 family inet dhcp
+set interfaces em1 unit 0 family inet address 169.254.0.2/24
+set interfaces lo0 unit 0 family inet address 10.0.1.1/32
+set forwarding-options storm-control-profiles default all
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 from protocol direct
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 from route-filter 10.0.1.1/32 exact
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 then accept
+set policy-options policy-statement PFE-ECMP then load-balance per-packet
+set policy-options policy-statement allow-loopback from interface lo0.0
+set policy-options policy-statement allow-loopback then accept
+set routing-options forwarding-table export PFE-ECMP
+set routing-options router-id 10.0.1.1
+set routing-options autonomous-system 4200000011
+set protocols bgp group UNDERLAY type external
+set protocols bgp group UNDERLAY family inet unicast
+set protocols bgp group UNDERLAY export BGP_LOOPBACK0
+set protocols bgp group UNDERLAY peer-as 4200000001
+set protocols bgp group UNDERLAY multipath
+set protocols bgp group UNDERLAY neighbor 10.2.1.0
+set protocols bgp group UNDERLAY neighbor 10.2.2.0
+set protocols bgp group OVERLAY type external
+set protocols bgp group OVERLAY multihop
+set protocols bgp group OVERLAY local-address 10.0.1.1
+set protocols bgp group OVERLAY family evpn signaling
+set protocols bgp group OVERLAY peer-as 4200000001
+set protocols bgp group OVERLAY multipath
+set protocols bgp group OVERLAY neighbor 10.0.1.0 description "Spine1 loopback"
+set protocols bgp group OVERLAY neighbor 10.0.2.0 description "Spine2 loopback"
+set protocols evpn encapsulation vxlan
+set protocols evpn extended-vni-list all
+set protocols igmp-snooping vlan default
+set switch-options vtep-source-interface lo0.0
+set switch-options route-distinguisher 10.0.1.1:3
+set switch-options vrf-target target:3:3
+set vlans default vlan-id 1
+set vlans v100 vlan-id 100
+set vlans v100 vxlan vni 10100
+```
