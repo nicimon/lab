@@ -9,6 +9,7 @@
 
 ---
 Для Overlay используем eBGP
+
 Конфигурация на Leaf
 ```text
 root@Leaf1# show protocols bgp group OVERLAY | display set 
