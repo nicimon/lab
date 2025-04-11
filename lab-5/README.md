@@ -98,7 +98,7 @@ set switch-options vtep-source-interface lo0.0
 set switch-options route-distinguisher 10.0.1.1:3
 set switch-options vrf-target target:3:3
 ```
-Указание evpn в качестве инкапсуляции
+Указание vxlan в качестве инкапсуляции
 ```text
 root@Leaf1# show protocols evpn | display set 
 set protocols evpn encapsulation vxlan
