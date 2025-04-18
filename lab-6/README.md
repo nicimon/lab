@@ -96,6 +96,7 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 3/4/5 ms
 <details>
 <summary>Leaf1</summary>
 
+Вывод show route
 ``` text
 root@Leaf1> show route    
 
@@ -1138,5 +1139,181 @@ macvrf-1.evpn.0: 26 destinations, 40 routes (26 active, 0 holddown, 0 hidden)
 3:10.0.1.6:100::10200::10.0.1.6/248 IM            
                    *[EVPN/170] 1d 03:44:26
                        Indirect
+```
+</details>
+
+Конфигурация оборудования Leaf1 и BorderLeaf2
+<details>
+<summary>Leaf1</summary>
+
+``` text
+root@Leaf1> show configuration | display set 
+set version 23.2R1-S1.6
+set system host-name Leaf1
+set system root-authentication encrypted-password "$6$sN3Ysqi/$YgsihrTjGtjJG3P8/Vhy.1tyCZ7dirYiHx1RR4Zt4ClNjfcmZdyS24ilQgfC6fulygvMCNTN.FcC5Rwa.iQEp0"
+set system syslog file interactive-commands interactive-commands any
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system processes dhcp-service traceoptions file dhcp_logfile
+set system processes dhcp-service traceoptions file size 10m
+set system processes dhcp-service traceoptions level all
+set system processes dhcp-service traceoptions flag packet
+set interfaces ge-0/0/1 unit 0 description "--- Leaf1 - Spine1  ---"
+set interfaces ge-0/0/1 unit 0 family inet address 10.2.1.1/31
+set interfaces ge-0/0/2 unit 0 description "--- Leaf1 - Spine2  ---"
+set interfaces ge-0/0/2 unit 0 family inet address 10.2.2.1/31
+set interfaces ge-0/0/3 encapsulation ethernet-bridge
+set interfaces ge-0/0/3 unit 0 family bridge
+set interfaces ge-0/0/4 encapsulation ethernet-bridge
+set interfaces ge-0/0/4 unit 0 family bridge
+set interfaces fxp0 unit 0 family inet dhcp vendor-id Juniper-vmx-VM67F66E9C21
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client client-type stateful
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client client-ia-type ia-na
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client client-identifier duid-type duid-ll
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client vendor-id Juniper:vmx:VM67F66E9C21
+set interfaces irb unit 100 family inet address 192.168.254.1/24 virtual-gateway-address 192.168.254.254
+set interfaces irb unit 200 family inet address 192.168.253.1/24 virtual-gateway-address 192.168.253.254
+set interfaces lo0 unit 0 family inet address 10.0.1.1/32
+set interfaces lo0 unit 10500 family inet
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 from protocol direct
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 from route-filter 10.0.1.1/32 exact
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 then accept
+set policy-options policy-statement PFE-ECMP then load-balance per-packet
+set policy-options policy-statement allow-loopback from interface lo0.0
+set policy-options policy-statement allow-loopback then accept
+set routing-instances Tenant1 instance-type vrf
+set routing-instances Tenant1 protocols evpn irb-symmetric-routing vni 10500
+set routing-instances Tenant1 protocols evpn ip-prefix-routes advertise direct-nexthop
+set routing-instances Tenant1 protocols evpn ip-prefix-routes encapsulation vxlan
+set routing-instances Tenant1 protocols evpn ip-prefix-routes vni 10500
+set routing-instances Tenant1 interface irb.100
+set routing-instances Tenant1 interface irb.200
+set routing-instances Tenant1 interface lo0.10500
+set routing-instances Tenant1 route-distinguisher 10.0.1.1:500
+set routing-instances Tenant1 vrf-target target:500:500
+set routing-instances macvrf-1 instance-type mac-vrf
+set routing-instances macvrf-1 protocols evpn encapsulation vxlan
+set routing-instances macvrf-1 protocols evpn default-gateway do-not-advertise
+set routing-instances macvrf-1 protocols evpn extended-vni-list all
+set routing-instances macvrf-1 protocols evpn multicast-mode ingress-replication
+set routing-instances macvrf-1 vtep-source-interface lo0.0
+set routing-instances macvrf-1 bridge-domains bd-v100 domain-type bridge
+set routing-instances macvrf-1 bridge-domains bd-v100 vlan-id 100
+set routing-instances macvrf-1 bridge-domains bd-v100 interface ge-0/0/3.0
+set routing-instances macvrf-1 bridge-domains bd-v100 routing-interface irb.100
+set routing-instances macvrf-1 bridge-domains bd-v100 vxlan vni 10100
+set routing-instances macvrf-1 bridge-domains bd-v200 domain-type bridge
+set routing-instances macvrf-1 bridge-domains bd-v200 vlan-id 200
+set routing-instances macvrf-1 bridge-domains bd-v200 interface ge-0/0/4.0
+set routing-instances macvrf-1 bridge-domains bd-v200 routing-interface irb.200
+set routing-instances macvrf-1 bridge-domains bd-v200 vxlan vni 10200
+set routing-instances macvrf-1 service-type vlan-aware
+set routing-instances macvrf-1 route-distinguisher 10.0.1.1:100
+set routing-instances macvrf-1 vrf-target target:3:3
+set routing-options router-id 10.0.1.1
+set routing-options autonomous-system 4200000011
+set routing-options forwarding-table export PFE-ECMP
+set routing-options forwarding-table ecmp-fast-reroute
+set protocols router-advertisement interface fxp0.0 managed-configuration
+set protocols bgp group UNDERLAY type external
+set protocols bgp group UNDERLAY family inet unicast
+set protocols bgp group UNDERLAY export BGP_LOOPBACK0
+set protocols bgp group UNDERLAY peer-as 4200000001
+set protocols bgp group UNDERLAY multipath
+set protocols bgp group UNDERLAY neighbor 10.2.1.0
+set protocols bgp group UNDERLAY neighbor 10.2.2.0
+set protocols bgp group OVERLAY type external
+set protocols bgp group OVERLAY multihop
+set protocols bgp group OVERLAY local-address 10.0.1.1
+set protocols bgp group OVERLAY family evpn signaling
+set protocols bgp group OVERLAY peer-as 4200000001
+set protocols bgp group OVERLAY multipath
+set protocols bgp group OVERLAY neighbor 10.0.1.0 description "Spine1 loopback"
+set protocols bgp group OVERLAY neighbor 10.0.2.0 description "Spine2 loopback"
+```
+</details>
+
+<details>
+<summary>BorderLeaf1</summary>
+
+``` text
+root@BorderLeaf2> show configuration | display set 
+set version 23.2R1-S1.6
+set system host-name BorderLeaf2
+set system root-authentication encrypted-password "$6$aS73LIyb$YrQXokgqZ9q33HaPYBYnbhqqo7pn30uEPoZ/w/9j5k4hTMiRBAUtuRpxV5u.aOv3QTM8aKyJq8yhpuHbd3S5n0"
+set system syslog file interactive-commands interactive-commands any
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system processes dhcp-service traceoptions file dhcp_logfile
+set system processes dhcp-service traceoptions file size 10m
+set system processes dhcp-service traceoptions level all
+set system processes dhcp-service traceoptions flag packet
+set interfaces ge-0/0/1 unit 0 family inet address 10.2.1.11/31
+set interfaces ge-0/0/2 unit 0 family inet address 10.2.2.11/31
+set interfaces ge-0/0/3 encapsulation ethernet-bridge
+set interfaces ge-0/0/3 unit 0 family bridge
+set interfaces ge-0/0/4 encapsulation ethernet-bridge
+set interfaces ge-0/0/4 unit 0 family bridge
+set interfaces fxp0 unit 0 family inet dhcp vendor-id Juniper-vmx-VM67F66EAED6
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client client-type stateful
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client client-ia-type ia-na
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client client-identifier duid-type duid-ll
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client vendor-id Juniper:vmx:VM67F66EAED6
+set interfaces irb unit 100 family inet address 192.168.254.1/24 virtual-gateway-address 192.168.254.254
+set interfaces irb unit 200 family inet address 192.168.253.1/24 virtual-gateway-address 192.168.253.254
+set interfaces lo0 unit 0 family inet address 10.0.1.6/32
+set interfaces lo0 unit 10500 family inet
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 from protocol direct
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 from route-filter 10.0.1.6/32 exact
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 then accept
+set policy-options policy-statement PFE-ECMP then load-balance per-packet
+set policy-options policy-statement allow-loopback from interface lo0.0
+set policy-options policy-statement allow-loopback then accept
+set routing-instances Tenant1 instance-type vrf
+set routing-instances Tenant1 protocols evpn irb-symmetric-routing vni 10500
+set routing-instances Tenant1 protocols evpn ip-prefix-routes advertise direct-nexthop
+set routing-instances Tenant1 protocols evpn ip-prefix-routes encapsulation vxlan
+set routing-instances Tenant1 protocols evpn ip-prefix-routes vni 10500
+set routing-instances Tenant1 interface irb.100
+set routing-instances Tenant1 interface irb.200
+set routing-instances Tenant1 interface lo0.10500
+set routing-instances Tenant1 route-distinguisher 10.0.1.6:500
+set routing-instances Tenant1 vrf-target target:500:500
+set routing-instances macvrf-1 instance-type mac-vrf
+set routing-instances macvrf-1 protocols evpn encapsulation vxlan
+set routing-instances macvrf-1 protocols evpn default-gateway do-not-advertise
+set routing-instances macvrf-1 protocols evpn extended-vni-list all
+set routing-instances macvrf-1 protocols evpn multicast-mode ingress-replication
+set routing-instances macvrf-1 vtep-source-interface lo0.0
+set routing-instances macvrf-1 bridge-domains bd-v100 vlan-id 100
+set routing-instances macvrf-1 bridge-domains bd-v100 interface ge-0/0/3.0
+set routing-instances macvrf-1 bridge-domains bd-v100 routing-interface irb.100
+set routing-instances macvrf-1 bridge-domains bd-v100 vxlan vni 10100
+set routing-instances macvrf-1 bridge-domains bd-v200 vlan-id 200
+set routing-instances macvrf-1 bridge-domains bd-v200 interface ge-0/0/4.0
+set routing-instances macvrf-1 bridge-domains bd-v200 routing-interface irb.200
+set routing-instances macvrf-1 bridge-domains bd-v200 vxlan vni 10200
+set routing-instances macvrf-1 service-type vlan-aware
+set routing-instances macvrf-1 route-distinguisher 10.0.1.6:100
+set routing-instances macvrf-1 vrf-target target:3:3
+set routing-options router-id 10.0.1.6
+set routing-options autonomous-system 4200000016
+set routing-options forwarding-table export PFE-ECMP
+set routing-options forwarding-table ecmp-fast-reroute
+set protocols router-advertisement interface fxp0.0 managed-configuration
+set protocols bgp group UNDERLAY type external
+set protocols bgp group UNDERLAY export BGP_LOOPBACK0
+set protocols bgp group UNDERLAY peer-as 4200000001
+set protocols bgp group UNDERLAY multipath
+set protocols bgp group UNDERLAY neighbor 10.2.1.10
+set protocols bgp group UNDERLAY neighbor 10.2.2.10
+set protocols bgp group OVERLAY type external
+set protocols bgp group OVERLAY multihop
+set protocols bgp group OVERLAY local-address 10.0.1.6
+set protocols bgp group OVERLAY family evpn signaling
+set protocols bgp group OVERLAY peer-as 4200000001
+set protocols bgp group OVERLAY multipath
+set protocols bgp group OVERLAY neighbor 10.0.1.0 description "Spine1 loopback"
+set protocols bgp group OVERLAY neighbor 10.0.2.0 description "Spine2 loopback"
 ```
 </details>
