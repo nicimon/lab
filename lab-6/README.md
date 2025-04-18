@@ -614,7 +614,9 @@ macvrf-1.evpn.0: 26 destinations, 40 routes (26 active, 0 holddown, 0 hidden)
                       AS path: 4200000001 4200000016 I, validation-state: unverified
                        to 10.2.1.0 via ge-0/0/1.0
                     >  to 10.2.2.0 via ge-0/0/2.0
+```
 </details>
+
 <details>
 <summary>BorderLeaf2</summary>
 
