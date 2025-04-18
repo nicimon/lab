@@ -58,7 +58,6 @@ set routing-instances Tenant1 protocols evpn ip-prefix-routes encapsulation vxla
 set routing-instances Tenant1 protocols evpn ip-prefix-routes vni 10500
 set routing-instances Tenant1 interface irb.100
 set routing-instances Tenant1 interface irb.200
-set routing-instances Tenant1 interface lo0.10500
 set routing-instances Tenant1 route-distinguisher 10.0.1.1:500
 set routing-instances Tenant1 vrf-target target:500:500
 ```
@@ -71,7 +70,6 @@ set routing-instances Tenant1 protocols evpn ip-prefix-routes encapsulation vxla
 set routing-instances Tenant1 protocols evpn ip-prefix-routes vni 10500
 set routing-instances Tenant1 interface irb.100
 set routing-instances Tenant1 interface irb.200
-set routing-instances Tenant1 interface lo0.10500
 set routing-instances Tenant1 route-distinguisher 10.0.1.6:500
 set routing-instances Tenant1 vrf-target target:500:500
 ```
