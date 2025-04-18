@@ -94,7 +94,7 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 3/4/5 ms
 ![img_6.1.png](screenshots/Lab-6.1.JPG)
 
 <details>
-<summary>BorderLeaf2</summary>
+<summary>Leaf1</summary>
 
 ``` text
 root@Leaf1> show route    
