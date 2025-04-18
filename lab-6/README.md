@@ -3,7 +3,7 @@
 ## VxLAN. EVPN L3
 ---
 ### Схема связи и адресное пространство
-Схема и адресное пространство взято из LAB-1
+Схема и адресное пространство взято из LAB-1.
 
 ![img_6.png](screenshots/Lab-6.JPG)
 
@@ -93,10 +93,10 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 3/4/5 ms
 Дамп пинга
 ![img_6.1.png](screenshots/Lab-6.1.JPG)
 
+Вывод show route
 <details>
 <summary>Leaf1</summary>
 
-Вывод show route
 ``` text
 root@Leaf1> show route    
 
