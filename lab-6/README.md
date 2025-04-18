@@ -6,3 +6,46 @@
 Схема и адресное пространство взято из LAB-1
 
 ![img_6.png](screenshots/Lab-6.JPG)
+
+Конфигурация MAC-VRF на Leaf1 для symmetric IRB
+```text
+set routing-instances macvrf-1 instance-type mac-vrf
+set routing-instances macvrf-1 protocols evpn encapsulation vxlan
+set routing-instances macvrf-1 protocols evpn default-gateway do-not-advertise
+set routing-instances macvrf-1 protocols evpn extended-vni-list all
+set routing-instances macvrf-1 protocols evpn multicast-mode ingress-replication
+set routing-instances macvrf-1 vtep-source-interface lo0.0
+set routing-instances macvrf-1 bridge-domains bd-v100 domain-type bridge
+set routing-instances macvrf-1 bridge-domains bd-v100 vlan-id 100
+set routing-instances macvrf-1 bridge-domains bd-v100 interface ge-0/0/3.0
+set routing-instances macvrf-1 bridge-domains bd-v100 routing-interface irb.100
+set routing-instances macvrf-1 bridge-domains bd-v100 vxlan vni 10100
+set routing-instances macvrf-1 bridge-domains bd-v200 domain-type bridge
+set routing-instances macvrf-1 bridge-domains bd-v200 vlan-id 200
+set routing-instances macvrf-1 bridge-domains bd-v200 interface ge-0/0/4.0
+set routing-instances macvrf-1 bridge-domains bd-v200 routing-interface irb.200
+set routing-instances macvrf-1 bridge-domains bd-v200 vxlan vni 10200
+set routing-instances macvrf-1 service-type vlan-aware
+set routing-instances macvrf-1 route-distinguisher 10.0.1.1:100
+set routing-instances macvrf-1 vrf-target target:3:3
+```
+
+```text
+set routing-instances macvrf-1 instance-type mac-vrf
+set routing-instances macvrf-1 protocols evpn encapsulation vxlan
+set routing-instances macvrf-1 protocols evpn default-gateway do-not-advertise
+set routing-instances macvrf-1 protocols evpn extended-vni-list all
+set routing-instances macvrf-1 protocols evpn multicast-mode ingress-replication
+set routing-instances macvrf-1 vtep-source-interface lo0.0
+set routing-instances macvrf-1 bridge-domains bd-v100 vlan-id 100
+set routing-instances macvrf-1 bridge-domains bd-v100 interface ge-0/0/3.0
+set routing-instances macvrf-1 bridge-domains bd-v100 routing-interface irb.100
+set routing-instances macvrf-1 bridge-domains bd-v100 vxlan vni 10100
+set routing-instances macvrf-1 bridge-domains bd-v200 vlan-id 200
+set routing-instances macvrf-1 bridge-domains bd-v200 interface ge-0/0/4.0
+set routing-instances macvrf-1 bridge-domains bd-v200 routing-interface irb.200
+set routing-instances macvrf-1 bridge-domains bd-v200 vxlan vni 10200
+set routing-instances macvrf-1 service-type vlan-aware
+set routing-instances macvrf-1 route-distinguisher 10.0.1.6:100
+set routing-instances macvrf-1 vrf-target target:3:3
+```
