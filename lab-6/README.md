@@ -75,3 +75,11 @@ set routing-instances Tenant1 interface lo0.10500
 set routing-instances Tenant1 route-distinguisher 10.0.1.6:500
 set routing-instances Tenant1 vrf-target target:500:500
 ```
+Проверка
+R37#ping 192.168.253.16      
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.253.16, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 3/4/8 ms
+
+![img_6.1.png](screenshots/Lab-6.1.JPG)
