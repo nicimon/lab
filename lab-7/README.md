@@ -217,7 +217,7 @@ Sending 5, 100-byte ICMP Echos to 192.168.253.11, timeout is 2 seconds:
 !!!!!
 Success rate is 100 percent (5/5), round-trip min/avg/max = 3/4/5 ms
 ```
-
+Снятие дампов с портов коммутатора в сторону Leaf2 и Leaf3 
 ![img_7.png](screenshots/Lab-7.1.JPG)
 
 ```text
