@@ -46,3 +46,61 @@ interface Vlan200
  shutdown
 end
 ```
+Настройка агрегированного канала на Leaf2, Leaf3
+```text
+root@Leaf2> show configuration | display set 
+set chassis aggregated-devices ethernet device-count 1
+
+set interfaces ge-0/0/3 gigether-options 802.3ad ae0
+
+set interfaces ae0 vlan-tagging
+set interfaces ae0 encapsulation flexible-ethernet-services
+set interfaces ae0 esi 00:12:12:12:12:12:12:12:12:12
+set interfaces ae0 esi all-active
+set interfaces ae0 aggregated-ether-options lacp active
+set interfaces ae0 aggregated-ether-options lacp system-id 12:12:12:12:12:12
+set interfaces ae0 unit 100 encapsulation vlan-bridge
+set interfaces ae0 unit 100 vlan-id 100
+set interfaces ae0 unit 200 encapsulation vlan-bridge
+set interfaces ae0 unit 200 vlan-id 200
+
+root@Leaf3> show configuration | display set
+set chassis aggregated-devices ethernet device-count 1
+
+set interfaces ge-0/0/3 gigether-options 802.3ad ae0
+set interfaces ae0 vlan-tagging
+set interfaces ae0 encapsulation flexible-ethernet-services
+set interfaces ae0 esi 00:12:12:12:12:12:12:12:12:12
+set interfaces ae0 esi all-active
+set interfaces ae0 aggregated-ether-options lacp active
+set interfaces ae0 aggregated-ether-options lacp system-id 12:12:12:12:12:12
+set interfaces ae0 unit 100 encapsulation vlan-bridge
+set interfaces ae0 unit 100 vlan-id 100
+set interfaces ae0 unit 200 encapsulation vlan-bridge
+set interfaces ae0 unit 200 vlan-id 200
+```
+```text
+root@Leaf2> show lacp interfaces extensive 
+Aggregated interface: ae0
+    LACP state:       Role   Exp   Def  Dist  Col  Syn  Aggr  Timeout  Activity
+      ge-0/0/3       Actor    No    No   Yes  Yes  Yes   Yes     Fast    Active
+      ge-0/0/3     Partner    No    No   Yes  Yes  Yes   Yes     Slow    Active
+    LACP protocol:        Receive State  Transmit State          Mux State 
+      ge-0/0/3                  Current   Slow periodic Collecting distributing
+    LACP info:        Role     System             System       Port     Port    Port 
+                             priority         identifier   priority   number     key 
+      ge-0/0/3       Actor        127  12:12:12:12:12:12        127        1       1
+      ge-0/0/3     Partner      32768  aa:bb:cc:80:05:00      32768        1       1
+
+root@Leaf3> show lacp interfaces extensive 
+Aggregated interface: ae0
+    LACP state:       Role   Exp   Def  Dist  Col  Syn  Aggr  Timeout  Activity
+      ge-0/0/3       Actor    No    No   Yes  Yes  Yes   Yes     Fast    Active
+      ge-0/0/3     Partner    No    No   Yes  Yes  Yes   Yes     Slow    Active
+    LACP protocol:        Receive State  Transmit State          Mux State 
+      ge-0/0/3                  Current   Slow periodic Collecting distributing
+    LACP info:        Role     System             System       Port     Port    Port 
+                             priority         identifier   priority   number     key 
+      ge-0/0/3       Actor        127  12:12:12:12:12:12        127        1       1
+      ge-0/0/3     Partner      32768  aa:bb:cc:80:05:00      32768        2       1
+```
