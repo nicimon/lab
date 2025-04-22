@@ -218,7 +218,7 @@ Sending 5, 100-byte ICMP Echos to 192.168.253.11, timeout is 2 seconds:
 Success rate is 100 percent (5/5), round-trip min/avg/max = 3/4/5 ms
 ```
 Снятие дампов с портов коммутатора в сторону Leaf2 и Leaf3 
-![img_7.png](screenshots/Lab-7.1.JPG)
+![img_7.1.png](screenshots/Lab-7.1.JPG)
 
 ```text
 Выполним проверку, с помощью выключения одного из линка на Po1 в сторону Leaf2 
@@ -240,8 +240,10 @@ Number of aggregators:           1
 Group  Port-channel  Protocol    Ports
 ------+-------------+-----------+-----------------------------------------------
 1      Po1(SU)         LACP      Et0/0(D)    Et0/1(P) 
+```
 
 Выполним пинг до другого коммутатора подключенного к Leaf1
+```text
 Switch#ping 192.168.253.11
 Type escape sequence to abort.
 Sending 5, 100-byte ICMP Echos to 192.168.253.11, timeout is 2 seconds:
