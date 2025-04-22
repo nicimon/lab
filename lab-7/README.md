@@ -46,7 +46,7 @@ interface Vlan200
  shutdown
 end
 ```
-Настройка агрегированного канала на Leaf2, Leaf3
+Настройка EVPN active/active multihoming на Leaf2, Leaf3 
 ```text
 root@Leaf2> show configuration | display set 
 set chassis aggregated-devices ethernet device-count 1
