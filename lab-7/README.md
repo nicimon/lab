@@ -79,7 +79,11 @@ set interfaces ae0 unit 100 vlan-id 100
 set interfaces ae0 unit 200 encapsulation vlan-bridge
 set interfaces ae0 unit 200 vlan-id 200
 ```
+Проверка агрегации
 ```text
+
+На коммутаторе
+
 Switch#sh etherchannel 1 summary 
 Number of channel-groups in use: 1
 Number of aggregators:           1
@@ -87,6 +91,8 @@ Number of aggregators:           1
 Group  Port-channel  Protocol    Ports
 ------+-------------+-----------+-----------------------------------------------
 1      Po1(SU)         LACP      Et0/0(P)    Et0/1(P)    
+
+На Leaf2 и Leaf3
 
 root@Leaf2> show lacp interfaces extensive 
 Aggregated interface: ae0
