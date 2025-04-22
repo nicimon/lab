@@ -117,7 +117,97 @@ Aggregated interface: ae0
                              priority         identifier   priority   number     key 
       ge-0/0/3       Actor        127  12:12:12:12:12:12        127        1       1
       ge-0/0/3     Partner      32768  aa:bb:cc:80:05:00      32768        2       1
-```
+
+root@Leaf2> show evpn instance macvrf-1 esi 00:12:12:12:12:12:12:12:12:12 extensive
+Instance: macvrf-1
+  Route Distinguisher: 10.0.1.2:100
+  Encapsulation type: VXLAN
+  Control word enabled
+  Duplicate MAC detection threshold: 5
+  Duplicate MAC detection window: 180
+  MAC database status                     Local  Remote
+    MAC advertisements:                       3      15
+    MAC+IP advertisements:                    5      11
+    Default gateway MAC advertisements:       4       0
+  Number of local interfaces: 3 (3 up)
+    Interface name  ESI                            Mode             Status     AC-Role
+    .local..6       00:00:00:00:00:00:00:00:00:00  single-homed     Up         Root 
+    ae0.100         00:12:12:12:12:12:12:12:12:12  all-active       Up         Root 
+    ae0.200         00:12:12:12:12:12:12:12:12:12  all-active       Up         Root 
+  Number of IRB interfaces: 2 (2 up)
+    Interface name  VLAN   VNI    Status  L3 context
+    irb.100                10100   Up     Tenant1                          
+    irb.200                10200   Up     Tenant1                          
+  Number of protect interfaces: 0       
+  Number of bridge domains: 2
+    VLAN  Domain-ID Intfs/up   IRB-intf  Mode            MAC-sync v4-SG-sync v6-SG-sync
+    100   10100        1  1    irb.100   Extended        Enabled  Disabled   Disabled  
+    200   10200        1  1    irb.200   Extended        Enabled  Disabled   Disabled  
+  Number of neighbors: 3
+    Address               MAC    MAC+IP        AD        IM        ES Leaf-label Remote-DCI-Peer Flow-label
+    10.0.1.1                6         4         2         2         0                            NO  
+    10.0.1.3                3         3         4         2         0                            NO  
+    10.0.1.6                6         4         2         2         0                            NO  
+  Number of ethernet segments: 9
+    ESI: 00:12:12:12:12:12:12:12:12:12
+      Status: Resolved by IFL ae0.200
+      Local interface: ae0.100, Status: Up/Forwarding
+      Number of remote PEs connected: 1
+        Remote-PE        MAC-label  Aliasing-label  Mode
+        10.0.1.3         10200      0               all-active   
+      DF Election Algorithm: MOD based
+      Designated forwarder: 10.0.1.2
+      Backup forwarder: 10.0.1.3
+      Last designated forwarder update: Apr 22 12:15:39
+  Router-ID: 10.0.1.2
+  Source VTEP interface IP: 10.0.1.2
+  SMET Forwarding: Disabled
+
+root@Leaf3> show evpn instance macvrf-1 esi 00:12:12:12:12:12:12:12:12:12 extensive
+Instance: macvrf-1
+  Route Distinguisher: 10.0.1.3:100
+  Encapsulation type: VXLAN
+  Control word enabled
+  Duplicate MAC detection threshold: 5
+  Duplicate MAC detection window: 180
+  MAC database status                     Local  Remote
+    MAC advertisements:                       3      15
+    MAC+IP advertisements:                    5      11
+    Default gateway MAC advertisements:       4       0
+  Number of local interfaces: 3 (3 up)
+    Interface name  ESI                            Mode             Status     AC-Role
+    .local..9       00:00:00:00:00:00:00:00:00:00  single-homed     Up         Root 
+    ae0.100         00:12:12:12:12:12:12:12:12:12  all-active       Up         Root 
+    ae0.200         00:12:12:12:12:12:12:12:12:12  all-active       Up         Root 
+  Number of IRB interfaces: 2 (2 up)
+    Interface name  VLAN   VNI    Status  L3 context
+    irb.100                10100   Up     Tenant1                          
+    irb.200                10200   Up     Tenant1                          
+  Number of protect interfaces: 0       
+  Number of bridge domains: 2
+    VLAN  Domain-ID Intfs/up   IRB-intf  Mode            MAC-sync v4-SG-sync v6-SG-sync
+    100   10100        1  1    irb.100   Extended        Enabled  Disabled   Disabled  
+    200   10200        1  1    irb.200   Extended        Enabled  Disabled   Disabled  
+  Number of neighbors: 3
+    Address               MAC    MAC+IP        AD        IM        ES Leaf-label Remote-DCI-Peer Flow-label
+    10.0.1.1                6         4         2         2         0                            NO  
+    10.0.1.2                3         3         4         2         0                            NO  
+    10.0.1.6                6         4         2         2         0                            NO  
+  Number of ethernet segments: 9
+    ESI: 00:12:12:12:12:12:12:12:12:12
+      Status: Resolved by IFL ae0.100
+      Local interface: ae0.200, Status: Up/Forwarding
+      Number of remote PEs connected: 1
+        Remote-PE        MAC-label  Aliasing-label  Mode
+        10.0.1.2         10100      0               all-active   
+      DF Election Algorithm: MOD based
+      Designated forwarder: 10.0.1.2
+      Backup forwarder: 10.0.1.3
+      Last designated forwarder update: Apr 22 12:15:40
+  Router-ID: 10.0.1.3
+  Source VTEP interface IP: 10.0.1.3
+  SMET Forwarding: Disabled
+  ```
 ```text
 Выполним пинг до другого коммутатора подключенного к Leaf1
 Switch#ping 192.168.253.11       
