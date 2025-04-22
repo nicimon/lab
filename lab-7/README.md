@@ -80,6 +80,14 @@ set interfaces ae0 unit 200 encapsulation vlan-bridge
 set interfaces ae0 unit 200 vlan-id 200
 ```
 ```text
+Switch#sh etherchannel 1 summary 
+Number of channel-groups in use: 1
+Number of aggregators:           1
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+1      Po1(SU)         LACP      Et0/0(P)    Et0/1(P)    
+
 root@Leaf2> show lacp interfaces extensive 
 Aggregated interface: ae0
     LACP state:       Role   Exp   Def  Dist  Col  Syn  Aggr  Timeout  Activity
