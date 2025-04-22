@@ -118,3 +118,38 @@ Aggregated interface: ae0
       ge-0/0/3       Actor        127  12:12:12:12:12:12        127        1       1
       ge-0/0/3     Partner      32768  aa:bb:cc:80:05:00      32768        2       1
 ```
+```text
+Выполним пинг до другого коммутатора подключенного к Leaf1
+Switch#ping 192.168.253.11       
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.253.11, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 3/4/5 ms
+
+Выполним проверку, с помощью выключения одного из линка на Po1 в сторону Leaf2 
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#int e0/0
+Switch(config-if)#shutdown 
+Switch(config-if)#^Z
+
+Switch#ping 192.168.253.11
+*Apr 22 11:58:06.326: %SYS-5-CONFIG_I: Configured from console by console
+*Apr 22 11:58:07.326: %LINK-5-CHANGED: Interface Ethernet0/0, changed state to administratively down
+*Apr 22 11:58:08.326: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet0/0, changed state to down
+
+Switch#sh etherchannel 1 summary 
+Number of channel-groups in use: 1
+Number of aggregators:           1
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+1      Po1(SU)         LACP      Et0/0(D)    Et0/1(P) 
+
+Выполним пинг до другого коммутатора подключенного к Leaf1
+Switch#ping 192.168.253.11
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.253.11, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 3/3/4 ms
+```
