@@ -220,8 +220,8 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 3/4/5 ms
 Снятие дампов с портов коммутатора в сторону Leaf2 и Leaf3 
 ![img_7.1.png](screenshots/Lab-7.1.JPG)
 
-```text
 Выполним проверку, с помощью выключения одного из линка на Po1 в сторону Leaf2 
+```text
 Switch#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
 Switch(config)#int e0/0
