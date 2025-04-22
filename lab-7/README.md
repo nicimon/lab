@@ -92,6 +92,7 @@ Group  Port-channel  Protocol    Ports
 ------+-------------+-----------+-----------------------------------------------
 1      Po1(SU)         LACP      Et0/0(P)    Et0/1(P)    
 
+
 На Leaf2 и Leaf3
 
 root@Leaf2> show lacp interfaces extensive 
@@ -215,6 +216,8 @@ Type escape sequence to abort.
 Sending 5, 100-byte ICMP Echos to 192.168.253.11, timeout is 2 seconds:
 !!!!!
 Success rate is 100 percent (5/5), round-trip min/avg/max = 3/4/5 ms
+
+![img_7.png](screenshots/Lab-7.1.JPG)
 
 Выполним проверку, с помощью выключения одного из линка на Po1 в сторону Leaf2 
 Switch#conf t
