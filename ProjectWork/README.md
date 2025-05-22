@@ -4,4 +4,4 @@
 ### Схема связи
 Схема и адресное пространство взято из LAB-1
 
-![pic1.png](screenshots/pic1.png)
+![Proj-1.PNG](screenshots/Proj-1.PNG)
