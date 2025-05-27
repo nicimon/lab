@@ -2081,3 +2081,9 @@ set protocols bgp group OVERLAY neighbor 10.0.2.0 description "Spine2 loopback"
 Миграция ВМ VM100
 
 ![Proj-7.PNG](screenshots/Proj-7.PNG)
+
+Дамп снятый на Leaf2 и Leaf3 в сторону nodeproxmox3
+![Proj-8.PNG](screenshots/Proj-8.PNG)
+
+Дамп снятый с Leaf1 в сторону Spine1 и Spine2
+![Proj-9.PNG](screenshots/Proj-9.PNG)
