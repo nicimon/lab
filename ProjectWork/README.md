@@ -120,4 +120,15 @@ Cеть состоит из:
 * Схема подключения нод proxmox - Multi-Homing (ESI);
 * Трафик внутри и меджу сайтами балансируется по ECMP.
 
+## Проверка работы сети:
+
+#### Связь между серверами proxmoxnode1 и proxmoxnode2
+![Proj-4.PNG](screenshots/Proj-4.PNG)
+
+#### Связь между серверами proxmoxnode1 и proxmoxnode3
+![Proj-5.PNG](screenshots/Proj-5.PNG)
+
+## Листинг команд с примерами вывода:
+#### Листинг:
+
 ![Proj-3.PNG](screenshots/Proj-3.PNG)
