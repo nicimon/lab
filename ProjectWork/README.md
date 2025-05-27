@@ -1410,7 +1410,7 @@ __default_evpn__.evpn.0: 3 destinations, 4 routes (3 active, 0 holddown, 0 hidde
    ```
 </details>
 
-### Конфигурация оборудования:
+## Конфигурация оборудования:
 
 <details>
 <summary>Spine1</summary>
@@ -2070,4 +2070,14 @@ set protocols bgp group OVERLAY neighbor 10.0.2.0 description "Spine2 loopback"
 ```
 </details>
 
+Настройка сети на ноде Proxmox
+
 ![Proj-3.PNG](screenshots/Proj-3.PNG)
+
+Вывод /etc/network/interfaces
+
+![Proj-6.PNG](screenshots/Proj-6.PNG)
+
+Миграция ВМ VM100
+
+![Proj-7.PNG](screenshots/Proj-7.PNG)
