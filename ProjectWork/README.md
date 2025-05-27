@@ -350,6 +350,8 @@ show route
 
 <summary>Leaf2</summary>
 
+``` text
+
 root@Leaf2> show route  
 
 inet.0: 11 destinations, 15 routes (11 active, 0 holddown, 0 hidden)
@@ -864,8 +866,550 @@ macvrf-1.evpn.0: 25 destinations, 44 routes (25 active, 0 holddown, 0 hidden)
                       AS path: 4200000001 4200000013 I, validation-state: unverified
                     >  to 10.2.1.2 via ge-0/0/1.0
                        to 10.2.2.2 via ge-0/0/2.0
-    ```
-
+```
 </details>
+
+<details>
+<summary>Leaf3</summary>
+
+``` text
+root@Leaf3> show route 
+
+inet.0: 11 destinations, 15 routes (11 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+10.0.1.0/32        *[BGP/170] 07:12:32, localpref 100
+                      AS path: 4200000001 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+10.0.1.1/32        *[BGP/170] 07:12:32, localpref 100, from 10.2.1.4
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0
+                    >  to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:32, localpref 100
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.2.4 via ge-0/0/2.0
+10.0.1.2/32        *[BGP/170] 07:12:32, localpref 100, from 10.2.1.4
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0
+                    >  to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:32, localpref 100
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.2.4 via ge-0/0/2.0
+10.0.1.3/32        *[Direct/0] 6d 05:32:21
+                    >  via lo0.0
+10.0.1.4/32        *[BGP/170] 07:12:32, localpref 100, from 10.2.1.4
+                      AS path: 4200000001 4200000014 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0
+                    >  to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:32, localpref 100
+                      AS path: 4200000001 4200000014 I, validation-state: unverified
+                    >  to 10.2.2.4 via ge-0/0/2.0
+10.0.1.6/32        *[BGP/170] 07:12:32, localpref 100, from 10.2.1.4
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0
+                    >  to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:32, localpref 100
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.2.4 via ge-0/0/2.0
+10.0.2.0/32        *[BGP/170] 07:12:32, localpref 100
+                      AS path: 4200000001 I, validation-state: unverified
+                    >  to 10.2.2.4 via ge-0/0/2.0
+10.2.1.4/31        *[Direct/0] 08:15:15
+                    >  via ge-0/0/1.0
+10.2.1.5/32        *[Local/0] 08:15:15
+                       Local via ge-0/0/1.0
+10.2.2.4/31        *[Direct/0] 08:15:15
+                    >  via ge-0/0/2.0
+10.2.2.5/32        *[Local/0] 08:15:15
+                       Local via ge-0/0/2.0
+
+Tenant1.inet.0: 1 destinations, 1 routes (1 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+172.20.31.0/24     *[EVPN/170] 07:12:29
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+
+inet6.0: 2 destinations, 2 routes (2 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+fe80::5253:a4ff:fe00:6600/128
+                   *[Local/0] 6d 06:10:23
+                       Reject
+ff02::2/128        *[INET6/0] 6d 06:12:08
+                       MultiRecv
+
+Tenant1.inet6.0: 1 destinations, 1 routes (1 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+ff02::2/128        *[INET6/0] 6d 05:32:22
+                       MultiRecv
+
+bgp.evpn.0: 29 destinations, 52 routes (29 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+1:10.0.1.2:0::121212121212121212::FFFF:FFFF/192 AD/ESI        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+1:10.0.1.2:100::121212121212121212::0/192 AD/EVI        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+1:10.0.1.3:0::121212121212121212::FFFF:FFFF/192 AD/ESI        
+                   *[EVPN/170] 07:12:06
+                       Indirect
+1:10.0.1.3:100::121212121212121212::0/192 AD/EVI        
+                   *[EVPN/170] 07:12:07
+                       Indirect
+1:10.0.1.6:0::05fa56ea100000277400::FFFF:FFFF/192 AD/ESI        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+2:10.0.1.1:100::10100::00:50:56:80:b0:e9/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.1:100::10100::00:50:56:80:bb:b7/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.1:100::10100::00:50:56:80:f7:71/304 MAC/IP        
+                   *[BGP/170] 00:00:16, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 00:00:16, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.2:100::10100::50:00:00:5e:00:01/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.2:100::10100::6a:26:9a:42:60:e1/304 MAC/IP        
+                   *[BGP/170] 06:58:18, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 06:58:18, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.3:100::10100::6a:26:9a:42:60:e1/304 MAC/IP        
+                   *[EVPN/170] 07:12:06
+                       Indirect
+2:10.0.1.4:100::10100::00:50:56:80:26:6c/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000014 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000014 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.6:100::10100::00:00:5e:00:01:01/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.1:100::10100::00:50:56:80:b0:e9::172.20.31.98/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.1:100::10100::00:50:56:80:bb:b7::172.20.31.75/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.1:100::10100::00:50:56:80:f7:71::172.20.31.81/304 MAC/IP        
+                   *[BGP/170] 00:00:16, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 00:00:16, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.2:100::10100::50:00:00:5e:00:01::172.20.31.80/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.2:100::10100::6a:26:9a:42:60:e1::172.20.31.102/304 MAC/IP        
+                   *[BGP/170] 06:11:03, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 06:11:03, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.3:100::10100::6a:26:9a:42:60:e1::172.20.31.102/304 MAC/IP        
+                   *[EVPN/170] 02:28:09
+                       Indirect
+2:10.0.1.4:100::10100::00:50:56:80:26:6c::172.20.31.68/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000014 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000014 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.6:100::10100::00:00:5e:00:01:01::172.20.31.1/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+3:10.0.1.1:100::10100::10.0.1.1/248 IM            
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+3:10.0.1.2:100::10100::10.0.1.2/248 IM            
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+3:10.0.1.3:100::10100::10.0.1.3/248 IM            
+                   *[EVPN/170] 6d 05:03:23
+                       Indirect
+3:10.0.1.4:100::10100::10.0.1.4/248 IM            
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000014 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000014 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+3:10.0.1.6:100::10100::10.0.1.6/248 IM            
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+4:10.0.1.2:0::121212121212121212:10.0.1.2/296 ES            
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+4:10.0.1.3:0::121212121212121212:10.0.1.3/296 ES            
+                   *[EVPN/170] 07:12:07
+                       Indirect
+5:10.0.1.6:500::0::172.20.31.0::24/248               
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 656
+                       to 10.2.2.4 via ge-0/0/2.0, Push 656
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 656
+                       to 10.2.2.4 via ge-0/0/2.0, Push 656
+
+Tenant1.evpn.0: 1 destinations, 2 routes (1 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+5:10.0.1.6:500::0::172.20.31.0::24/248               
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 656
+                       to 10.2.2.4 via ge-0/0/2.0, Push 656
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 656
+                       to 10.2.2.4 via ge-0/0/2.0, Push 656
+
+macvrf-1.evpn.0: 25 destinations, 46 routes (25 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+1:10.0.1.2:0::121212121212121212::FFFF:FFFF/192 AD/ESI        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+1:10.0.1.2:100::121212121212121212::0/192 AD/EVI        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+1:10.0.1.3:100::121212121212121212::0/192 AD/EVI        
+                   *[EVPN/170] 07:12:07
+                       Indirect
+1:10.0.1.6:0::05fa56ea100000277400::FFFF:FFFF/192 AD/ESI        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+2:10.0.1.1:100::10100::00:50:56:80:b0:e9/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.1:100::10100::00:50:56:80:bb:b7/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.1:100::10100::00:50:56:80:f7:71/304 MAC/IP        
+                   *[BGP/170] 00:00:16, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 00:00:16, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.2:100::10100::50:00:00:5e:00:01/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.2:100::10100::6a:26:9a:42:60:e1/304 MAC/IP        
+                   *[BGP/170] 06:58:18, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 06:58:18, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.3:100::10100::6a:26:9a:42:60:e1/304 MAC/IP        
+                   *[EVPN/170] 07:12:06
+                       Indirect
+2:10.0.1.4:100::10100::00:50:56:80:26:6c/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000014 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000014 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.6:100::10100::00:00:5e:00:01:01/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.1:100::10100::00:50:56:80:b0:e9::172.20.31.98/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.1:100::10100::00:50:56:80:bb:b7::172.20.31.75/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.1:100::10100::00:50:56:80:f7:71::172.20.31.81/304 MAC/IP        
+                   *[BGP/170] 00:00:16, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 00:00:16, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.2:100::10100::50:00:00:5e:00:01::172.20.31.80/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.2:100::10100::6a:26:9a:42:60:e1::172.20.31.102/304 MAC/IP        
+                   *[BGP/170] 06:11:03, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 06:11:03, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0, Push 631
+                       to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.3:100::10100::6a:26:9a:42:60:e1::172.20.31.102/304 MAC/IP        
+                   *[EVPN/170] 02:28:09
+                       Indirect
+2:10.0.1.4:100::10100::00:50:56:80:26:6c::172.20.31.68/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000014 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000014 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+2:10.0.1.6:100::10100::00:00:5e:00:01:01::172.20.31.1/304 MAC/IP        
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                       to 10.2.1.4 via ge-0/0/1.0, Push 631
+                    >  to 10.2.2.4 via ge-0/0/2.0, Push 631
+3:10.0.1.1:100::10100::10.0.1.1/248 IM            
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000011 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+3:10.0.1.2:100::10100::10.0.1.2/248 IM            
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+3:10.0.1.3:100::10100::10.0.1.3/248 IM            
+                   *[EVPN/170] 6d 05:03:23
+                       Indirect
+3:10.0.1.4:100::10100::10.0.1.4/248 IM            
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000014 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000014 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+3:10.0.1.6:100::10100::10.0.1.6/248 IM            
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000016 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+
+__default_evpn__.evpn.0: 3 destinations, 4 routes (3 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+1:10.0.1.3:0::121212121212121212::FFFF:FFFF/192 AD/ESI        
+                   *[EVPN/170] 07:12:06
+                       Indirect
+4:10.0.1.2:0::121212121212121212:10.0.1.2/296 ES            
+                   *[BGP/170] 07:12:29, localpref 100, from 10.0.1.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0
+                       to 10.2.2.4 via ge-0/0/2.0
+                    [BGP/170] 07:12:29, localpref 100, from 10.0.2.0
+                      AS path: 4200000001 4200000012 I, validation-state: unverified
+                    >  to 10.2.1.4 via ge-0/0/1.0             
+
+   ```
+</details>
+
+
 
 ![Proj-3.PNG](screenshots/Proj-3.PNG)
