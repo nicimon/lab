@@ -426,3 +426,160 @@ set protocols bgp group OVERLAY neighbor 10.0.2.0 description "Spine2 loopback"
 
 ```
 </details>
+
+<details>
+<summary>BorderLeaf1</summary>
+
+``` text
+root@BorderLeaf1> show configuration | display set 
+set version 23.2R1-S1.6
+set system host-name BorderLeaf1
+set system root-authentication encrypted-password "$6$76Ij4f.4$S6Xch11NPUEJnSvcLUN13s/AK0Eshx2xEVq02D5OpjTi25Tm2Nua0EA1ILOBlYZFAPaNx4xcCqdvMvJOUDCT40"
+set system syslog file interactive-commands interactive-commands any
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system processes dhcp-service traceoptions file dhcp_logfile
+set system processes dhcp-service traceoptions file size 10m
+set system processes dhcp-service traceoptions level all
+set system processes dhcp-service traceoptions flag packet
+set interfaces ge-0/0/1 mtu 9000
+set interfaces ge-0/0/1 unit 0 description "--- BorderLeaf1 - Spine1  ---"
+set interfaces ge-0/0/1 unit 0 family inet address 10.2.1.9/31
+set interfaces ge-0/0/2 mtu 9000
+set interfaces ge-0/0/2 unit 0 description "--- BorderLeaf1 - Spine2  ---"
+set interfaces ge-0/0/2 unit 0 family inet address 10.2.2.9/31
+set interfaces ge-0/0/3 mtu 9000
+set interfaces ge-0/0/3 unit 0 family inet address 198.51.200.20/31
+set interfaces fxp0 unit 0 family inet dhcp vendor-id Juniper-vmx-VM67F66ECA04
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client client-type stateful
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client client-ia-type ia-na
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client client-identifier duid-type duid-ll
+set interfaces fxp0 unit 0 family inet6 dhcpv6-client vendor-id Juniper:vmx:VM67F66ECA04
+set interfaces lo0 unit 0 family inet address 10.0.1.5/32
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 from protocol direct
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 from route-filter 10.0.1.5/32 exact
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 then accept
+set policy-options policy-statement PFE-ECMP then load-balance per-packet
+set policy-options policy-statement Tenant1 term 1 from route-filter 198.51.0.0/16 orlonger
+set policy-options policy-statement Tenant1 term 1 then accept
+set policy-options policy-statement Tenant1 term 2 from route-filter 10.100.0.0/16 orlonger
+set policy-options policy-statement Tenant1 term 2 then accept
+set policy-options policy-statement Tenant1 term 3 from route-filter 198.52.0.0/16 orlonger
+set policy-options policy-statement Tenant1 term 3 then accept
+set policy-options policy-statement allow-loopback from interface lo0.0
+set policy-options policy-statement allow-loopback then accept
+set policy-options policy-statement export-to-Tenant1 term 1 from protocol evpn
+set policy-options policy-statement export-to-Tenant1 term 1 then accept
+set policy-options policy-statement export-to-Tenant1 term 2 then reject
+set routing-instances Tenant1 instance-type vrf
+set routing-instances Tenant1 protocols bgp group Tenant1 type external
+set routing-instances Tenant1 protocols bgp group Tenant1 family inet unicast
+set routing-instances Tenant1 protocols bgp group Tenant1 export export-to-Tenant1
+set routing-instances Tenant1 protocols bgp group Tenant1 peer-as 65003
+set routing-instances Tenant1 protocols bgp group Tenant1 neighbor 198.51.200.21
+set routing-instances Tenant1 protocols evpn ip-prefix-routes advertise direct-nexthop
+set routing-instances Tenant1 protocols evpn ip-prefix-routes encapsulation vxlan
+set routing-instances Tenant1 protocols evpn ip-prefix-routes vni 10500
+set routing-instances Tenant1 protocols evpn ip-prefix-routes export Tenant1
+set routing-instances Tenant1 interface ge-0/0/3.0
+set routing-instances Tenant1 route-distinguisher 10.0.1.5:500
+set routing-instances Tenant1 vrf-target target:500:500
+set routing-options router-id 10.0.1.5
+set routing-options autonomous-system 4200000015
+set routing-options autonomous-system loops 2
+set routing-options forwarding-table export PFE-ECMP
+set routing-options forwarding-table ecmp-fast-reroute
+set protocols router-advertisement interface fxp0.0 managed-configuration
+set protocols bgp group UNDERLAY type external
+set protocols bgp group UNDERLAY family inet unicast
+set protocols bgp group UNDERLAY export BGP_LOOPBACK0
+set protocols bgp group UNDERLAY peer-as 4200000001
+set protocols bgp group UNDERLAY multipath multiple-as
+set protocols bgp group UNDERLAY neighbor 10.2.1.8
+set protocols bgp group UNDERLAY neighbor 10.2.2.8
+set protocols bgp group OVERLAY type external
+set protocols bgp group OVERLAY multihop
+set protocols bgp group OVERLAY local-address 10.0.1.5
+set protocols bgp group OVERLAY family evpn signaling
+set protocols bgp group OVERLAY peer-as 4200000001
+set protocols bgp group OVERLAY multipath
+set protocols bgp group OVERLAY neighbor 10.0.1.0 description "Spine1 loopback"
+set protocols bgp group OVERLAY neighbor 10.0.2.0 description "Spine2 loopback"
+
+
+```
+</details>
+
+<details>
+<summary>BorderLeaf2</summary>
+
+``` text
+root@BorderLeaf2> show configuration | display set 
+set version 23.2R1-S1.6
+set system host-name BorderLeaf2
+set system root-authentication encrypted-password "$6$aS73LIyb$YrQXokgqZ9q33HaPYBYnbhqqo7pn30uEPoZ/w/9j5k4hTMiRBAUtuRpxV5u.aOv3QTM8aKyJq8yhpuHbd3S5n0"
+set system syslog file interactive-commands interactive-commands any
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system processes dhcp-service traceoptions file dhcp_logfile
+set system processes dhcp-service traceoptions file size 10m
+set system processes dhcp-service traceoptions level all
+set system processes dhcp-service traceoptions flag packet
+set interfaces ge-0/0/1 mtu 9000
+set interfaces ge-0/0/1 unit 0 family inet address 10.2.1.11/31
+set interfaces ge-0/0/2 mtu 9000
+set interfaces ge-0/0/2 unit 0 family inet address 10.2.2.11/31
+set interfaces ge-0/0/3 unit 0 family inet address 198.51.10.20/31
+set interfaces lo0 unit 0 family inet address 10.0.1.6/32
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 from protocol direct
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 from route-filter 10.0.1.6/32 exact
+set policy-options policy-statement BGP_LOOPBACK0 term TERM1 then accept
+set policy-options policy-statement PFE-ECMP then load-balance per-packet
+set policy-options policy-statement Tenant2 term 2 from route-filter 198.51.0.0/16 orlonger
+set policy-options policy-statement Tenant2 term 2 then accept
+set policy-options policy-statement Tenant2 term 1 from route-filter 10.100.0.0/16 orlonger
+set policy-options policy-statement Tenant2 term 1 then accept
+set policy-options policy-statement Tenant2 term 3 from route-filter 198.52.0.0/16 orlonger
+set policy-options policy-statement Tenant2 term 3 then accept
+set policy-options policy-statement allow-loopback from interface lo0.0
+set policy-options policy-statement allow-loopback then accept
+set policy-options policy-statement export-to-Tenant2 term 1 from protocol evpn
+set policy-options policy-statement export-to-Tenant2 term 1 then accept
+set policy-options policy-statement export-to-Tenant2 term 2 then reject
+set routing-instances Tenant2 instance-type vrf
+set routing-instances Tenant2 protocols bgp group Tenant2 type external
+set routing-instances Tenant2 protocols bgp group Tenant2 family inet unicast
+set routing-instances Tenant2 protocols bgp group Tenant2 export export-to-Tenant2
+set routing-instances Tenant2 protocols bgp group Tenant2 peer-as 65003
+set routing-instances Tenant2 protocols bgp group Tenant2 neighbor 198.51.10.21
+set routing-instances Tenant2 protocols evpn irb-symmetric-routing vni 10600
+set routing-instances Tenant2 protocols evpn ip-prefix-routes advertise direct-nexthop
+set routing-instances Tenant2 protocols evpn ip-prefix-routes encapsulation vxlan
+set routing-instances Tenant2 protocols evpn ip-prefix-routes vni 10600
+set routing-instances Tenant2 protocols evpn ip-prefix-routes export Tenant2
+set routing-instances Tenant2 interface ge-0/0/3.0
+set routing-instances Tenant2 route-distinguisher 10.0.1.6:600
+set routing-instances Tenant2 vrf-target target:600:600
+set routing-options router-id 10.0.1.6
+set routing-options autonomous-system 4200000016
+set routing-options autonomous-system loops 2
+set routing-options forwarding-table export PFE-ECMP
+set routing-options forwarding-table ecmp-fast-reroute
+set protocols router-advertisement interface fxp0.0 managed-configuration
+set protocols bgp group UNDERLAY type external
+set protocols bgp group UNDERLAY export BGP_LOOPBACK0
+set protocols bgp group UNDERLAY peer-as 4200000001
+set protocols bgp group UNDERLAY multipath
+set protocols bgp group UNDERLAY neighbor 10.2.1.10
+set protocols bgp group UNDERLAY neighbor 10.2.2.10
+set protocols bgp group OVERLAY type external
+set protocols bgp group OVERLAY multihop
+set protocols bgp group OVERLAY local-address 10.0.1.6
+set protocols bgp group OVERLAY family evpn signaling
+set protocols bgp group OVERLAY peer-as 4200000001
+set protocols bgp group OVERLAY multipath
+set protocols bgp group OVERLAY neighbor 10.0.1.0 description "Spine1 loopback"
+set protocols bgp group OVERLAY neighbor 10.0.2.0 description "Spine2 loopback"
+
+```
+</details>
